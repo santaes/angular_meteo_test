@@ -190,29 +190,257 @@ interface MinuteData {
 
       <!-- Tabla de datos recientes -->
       <section class="data-table">
-        <h2>📋 Últimos 10 Minutos</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Hora</th>
-              <th>Energía (kWh)</th>
-              <th>Temperatura (°C)</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (data of getRecentData(); track data.uniqueKey) {
+        <div class="table-header">
+          <h2>📋 Historial de Datos</h2>
+          <div class="page-size-selector">
+            <span>Mostrar:</span>
+            <select (change)="changePageSize($any($event.target).value)" [value]="itemsPerPage">
+              @for (size of pageSizes; track size) {
+                <option [value]="size">{{ size }} por página</option>
+              }
+            </select>
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <table>
+            <thead>
               <tr>
-                <td>{{ data.displayTime }}</td>
-                <td>{{ data.powerKWh.toFixed(3) }}</td>
-                <td>{{ data.tempCelsius.toFixed(2) }}</td>
+                <th class="time-header">Hora</th>
+                <th class="number-header">Energía (kWh)</th>
+                <th class="number-header">Temperatura (°C)</th>
               </tr>
+            </thead>
+            <tbody>
+              @for (data of paginatedData; track data.uniqueKey) {
+                <tr>
+                  <td class="time-cell">{{ data.displayTime }}</td>
+                  <td class="number-cell">{{ data.powerKWh.toFixed(2) }}</td>
+                  <td class="number-cell">{{ data.tempCelsius.toFixed(2) }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="pagination-controls">
+          <button 
+            (click)="changePage(1)" 
+            [disabled]="currentPage === 1"
+            [class.disabled]="currentPage === 1">
+            &laquo;
+          </button>
+          <button 
+            (click)="changePage(currentPage - 1)" 
+            [disabled]="currentPage === 1"
+            [class.disabled]="currentPage === 1">
+            &lsaquo;
+          </button>
+          
+          @for (page of getPageNumbers(); track page) {
+            @if (page === '...') {
+              <span class="ellipsis">...</span>
+            } @else {
+              <button 
+                (click)="changePage(+page)" 
+                [class.active]="page === currentPage">
+                {{ page }}
+              </button>
             }
-          </tbody>
-        </table>
+          }
+          
+          <button 
+            (click)="changePage(currentPage + 1)" 
+            [disabled]="currentPage === totalPages"
+            [class.disabled]="currentPage === totalPages">
+            &rsaquo;
+          </button>
+          <button 
+            (click)="changePage(totalPages)" 
+            [disabled]="currentPage === totalPages"
+            [class.disabled]="currentPage === totalPages">
+            &raquo;
+          </button>
+          
+          <span class="page-info">
+            Página {{ currentPage }} de {{ totalPages }} ({{ minuteData().length }} registros)
+          </span>
+        </div>
       </section>
     </div>
   `,
   styles: [`
+    /* Pagination styles */
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .page-size-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .page-size-selector select {
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background: white;
+      font-size: 0.9rem;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      margin: 1rem 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      padding: 1rem;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.95rem;
+    }
+    
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    
+    th {
+      background-color: #f8f9fa;
+      color: #495057;
+      text-align: center;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    
+    .number-header {
+      text-align: right !important;
+    }
+    
+    .time-header {
+      text-align: left !important;
+    }
+    
+    td {
+      color: #2c3e50;
+      vertical-align: middle;
+    }
+    
+    tr:not(:last-child) td {
+      border-bottom: 1px solid #f1f3f5;
+    }
+    
+    tr:hover td {
+      background-color: #f8f9fa;
+    }
+    
+    .number-cell {
+      font-family: 'Roboto Mono', 'Courier New', monospace;
+      text-align: center;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+    
+    .time-cell {
+      color: #495057;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    
+    @media (max-width: 768px) {
+      .table-container {
+        padding: 0.5rem;
+      }
+      
+      th, td {
+        padding: 0.6rem 0.5rem;
+        font-size: 0.85rem;
+      }
+      
+      th {
+        font-size: 0.75rem;
+      }
+    }
+    
+    .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .pagination-controls button {
+      padding: 0.5rem 0.8rem;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .pagination-controls button:hover:not(:disabled) {
+      background: #f0f0f0;
+    }
+    
+    .pagination-controls button.active {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+    
+    .pagination-controls button.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .pagination-controls button[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .page-info {
+      margin-left: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    
+    @media (max-width: 768px) {
+      .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .pagination-controls {
+        gap: 0.3rem;
+      }
+      
+      .pagination-controls button {
+        padding: 0.3rem 0.6rem;
+      }
+      
+      .page-info {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0 0;
+      }
+    }
     .tooltip {
       position: fixed;
       background: rgba(0, 0, 0, 0.8);
@@ -420,8 +648,8 @@ export class App implements OnInit, OnDestroy {
   minuteData = signal<MinuteData[]>([]);
 
   ngOnInit() {
-    console.log(' Application initialized');
-    console.log(' Current time:', new Date().toLocaleTimeString());
+/*     console.log(' Application initialized');
+    console.log(' Current time:', new Date().toLocaleTimeString()); */
     
     // Simular carga de datos YAML
     // En producción, usar: this.http.get('assets/data.yml')
@@ -433,23 +661,23 @@ export class App implements OnInit, OnDestroy {
     });
     
     // Update data every 5 seconds
-    console.log(' Setting up 5-second data update interval...');
+   // console.log(' Setting up 5-second data update interval...');
     this.subscription.add(interval(5000).subscribe(() => {
       this.updateData();
     }));
     
     // First data update immediately
-    console.log(' Triggering first data update...');
+   // console.log(' Triggering first data update...');
     this.updateData();
   }
 
   ngOnDestroy() {
-    console.log(' Application destroyed - cleaning up subscription');
+   // console.log(' Application destroyed - cleaning up subscription');
     this.subscription?.unsubscribe();
   }
 
   private loadYamlData() {
-    console.log(' Starting YAML data load...');
+   // console.log(' Starting YAML data load...');
     
     // Simular datos del YAML para 24 horas
     const powerValues: DataPoint[] = [];
@@ -475,11 +703,34 @@ export class App implements OnInit, OnDestroy {
       temperature: { unit: 'dK', values: tempValues }
     };
     
-    console.log(' YAML data loaded successfully');
+   /*  console.log(' YAML data loaded successfully');
     console.log(' Total power data points:', powerValues.length);
     console.log(' Total temperature data points:', tempValues.length);
     console.log(' Time range:', powerValues[0].time, 'to', powerValues[powerValues.length - 1].time);
-    console.log('─────────────────────────────────');
+    console.log('─────────────────────────────────'); */
+  }
+
+  getPageNumbers(): (number | string)[] {
+    const total = this.totalPages;
+    const current = this.currentPage;
+    const delta = 2;
+    const range: (number | string)[] = [];
+    
+    for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+      range.push(i);
+    }
+    
+    if (current - delta > 2) {
+      range.unshift('...');
+    }
+    if (current + delta < total - 1) {
+      range.push('...');
+    }
+    
+    range.unshift(1);
+    if (total > 1) range.push(total);
+    
+    return range;
   }
 
   private updateData() {
@@ -495,33 +746,33 @@ export class App implements OnInit, OnDestroy {
     const secondsToday = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
     const index = Math.floor(secondsToday / 5);
     
-    console.log(' UPDATE TRIGGERED');
+/*     console.log(' UPDATE TRIGGERED');
     console.log(' Current time:', now.toLocaleTimeString());
     console.log(' Seconds today:', secondsToday);
     console.log(' Data index:', index);
     console.log('⏰ Current time:', now.toLocaleTimeString());
     console.log('📊 Seconds today:', secondsToday);
-    console.log('📍 Data index:', index);
+    console.log('📍 Data index:', index); */
     
     if (index < this.yamlData.power.values.length) {
       const powerMW = this.yamlData.power.values[index].value;
       const tempDK = this.yamlData.temperature.values[index].value;
       const dataTime = this.yamlData.power.values[index].time;
       
-      console.log('📈 Raw data from YAML:',this.minuteData());
+     /*  console.log('📈 Raw data from YAML:',this.minuteData());
       console.log('  - Time from file:', dataTime);
       console.log('  - Power (MW):', powerMW);
       console.log('  - Temperature (dK):', tempDK);
-      
+       */
       // Convertir MW a kWh (para 5 segundos)
       const powerKWh = powerMW * 1000 * (5 / 3600);
       
       // Convertir dK a °C
       const tempCelsius = tempDK / 10 - 273.15;
       
-      console.log('🔄 Converted values:');
+/*       console.log('🔄 Converted values:');
       console.log('  - Power (kWh):', powerKWh.toFixed(2));
-      console.log('  - Temperature (°C):', tempCelsius.toFixed(2));
+      console.log('  - Temperature (°C):', tempCelsius.toFixed(2)); */
       
       this.currentPowerKWh.set(powerKWh.toFixed(2));
       this.currentTempCelsius.set(tempCelsius.toFixed(2));
@@ -529,10 +780,10 @@ export class App implements OnInit, OnDestroy {
       
       // Actualizar datos por minuto
       this.updateMinuteData(now, powerKWh, tempCelsius);
-      
+/*       
       console.log('✅ Data updated successfully');
       console.log('📊 Total minute data points:', this.minuteData().length);
-      console.log('─────────────────────────────────');
+      console.log('─────────────────────────────────'); */
     } else {
       console.error('❌ Index out of bounds:', index, '>=', this.yamlData.power.values.length);
     }
@@ -561,7 +812,31 @@ export class App implements OnInit, OnDestroy {
     }].slice(-120); // Keep last 10 minutes of 5-second data points
     
     this.minuteData.set(newData);
-    console.log('➕ Added new data point:', displayTime);
+/*     console.log('➕ Added new data point:', displayTime); */
+  }
+
+  currentPage = 1;
+  itemsPerPage = 5;
+  pageSizes = [5, 10, 20, 50];
+
+  get totalPages(): number {
+    return Math.ceil(this.minuteData().length / this.itemsPerPage);
+  }
+
+  get paginatedData() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.getRecentData().slice(start, start + this.itemsPerPage);
+  }
+
+  changePage(newPage: number) {
+    if (newPage >= 1 && newPage <= this.totalPages) {
+      this.currentPage = newPage;
+    }
+  }
+
+  changePageSize(newSize: number) {
+    this.itemsPerPage = newSize;
+    this.currentPage = 1; // Reset to first page when changing page size
   }
 
   private formatCurrentTime(): string {
