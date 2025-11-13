@@ -46,7 +46,6 @@ interface MinuteData {
     
     <div class="dashboard">
       <header>
-        <h1>⚡ Dashboard de Monitoreo en Tiempo Real</h1>
         <div class="current-time">{{ currentTime() }}</div>
       </header>
 
@@ -501,7 +500,7 @@ interface MinuteData {
       margin-bottom: 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
 
@@ -529,6 +528,7 @@ interface MinuteData {
       padding: 30px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       transition: transform 0.3s;
@@ -607,6 +607,7 @@ interface MinuteData {
     table {
       width: 100%;
       border-collapse: collapse;
+      
     }
 
     th, td {
