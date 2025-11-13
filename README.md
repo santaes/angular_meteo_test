@@ -39,7 +39,7 @@ A real-time monitoring dashboard for energy production and temperature data, bui
 
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
+   git clone 'https://github.com/santaes/angular_meteo_test'
    cd angular_meteo_test
    ```
 
