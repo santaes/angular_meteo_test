@@ -79,75 +79,122 @@ interface YamlData {
 
 ## 🛠️ Development
 
-### Data Simulation
+### Data Source
 
-The application includes a built-in data simulator that generates 24 hours of sample data with 5-second intervals. The data includes:
-- Power values between 54.5 and 56.0 MW
-- Temperature values between 292.0K and 293.0K (18.85°C to 19.85°C)
+The application loads data from the root `data.yml` file with the following structure:
+- Power values in MW (Megawatts)
+- Temperature values in dK (deciKelvin)
+- Data points recorded at 5-second intervals
+
+The YAML file should follow this structure:
+
+```yaml
+power:
+  unit: 'MW'
+  values:
+    - { time: '00:00:00', value: 54.5 }
+    - { time: '00:00:05', value: 54.7 }
+    # ... more data points
+
+temperature:
+  unit: 'dK'
+  values:
+    - { time: '00:00:00', value: 2920 }
+    - { time: '00:00:05', value: 2921 }
+    # ... more data points
+```
+
+### Key Features
+
+- **Real-time Data Processing**
+  - Loads and parses YAML data
+  - Converts MW to kWh for energy display
+  - Converts deciKelvin to Celsius for temperature
+  - Handles data synchronization between power and temperature metrics
+
+- **Error Handling**
+  - Graceful fallback to simulated data on errors
+  - Comprehensive error logging
+  - Data validation and bounds checking
 
 ### Key Components
 
-- **app.component.ts**: Main application logic and data handling
-- **app.component.html**: UI layout and templates
+- **app.ts**: Main application component with data handling and processing logic
+- **app.component.html**: UI layout and templates with responsive design
 - **app.component.scss**: Styling and theming
+- **data.yml**: Data source file in the project root
 
 ## 🏗️ Project Structure
 
 ```
-src/
-├── app/
-│   ├── app.component.ts      # Main application component
-│   ├── app.component.html    # Main template
-│   ├── app.component.scss    # Styles
-│   └── app.config.ts         # Application configuration
-├── assets/
-│   └── data/                # Data files
-└── styles.scss              # Global styles
+angular_meteo_test/
+├── data.yml                  # Main data source file
+├── src/
+│   ├── app/
+│   │   ├── app.ts           # Main application component
+│   │   ├── app.component.html # Main template
+│   │   └── app.component.scss # Styles
+│   ├── assets/              # Static assets
+│   └── styles.scss          # Global styles
+├── tsconfig.doc.json        # Documentation config
+└── package.json             # Project dependencies
 ```
 
-## 🧪 Testing
+## 📊 Data Processing
 
-Run unit tests:
+The application processes data with the following conversions:
+
+1. **Power Conversion**
+   - Input: MW (Megawatts)
+   - Output: kWh (kilowatt-hours)
+   - Formula: `kWh = MW * 1000 * (5/3600)` (for 5-second intervals)
+
+2. **Temperature Conversion**
+   - Input: dK (deciKelvin)
+   - Output: °C (Celsius)
+   - Formula: `°C = (dK / 10) - 273.15`
+
+## 🧪 Development
+
+### Running the Application
+
 ```bash
-ng test
-```
+# Install dependencies
+npm install
 
-Run end-to-end tests:
-```bash
-ng e2e
-```
+# Start development server
+ng serve
 
-## 🚀 Deployment
-
-Build for production:
-```bash
+# Build for production
 ng build --configuration production
 ```
 
-The build artifacts will be stored in the `dist/` directory.
+### Documentation
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Angular](https://angular.io/)
-- Icons by [Font Awesome](https://fontawesome.com/)
-- Charts rendered with SVG
-
----
-
-<div align="center">
-  Made with ❤️ by [Your Name]
-</div>
-
+Generate project documentation using Compodoc:
 ```bash
-ng e2e
+npx compodoc -p tsconfig.doc.json --disableSourceCode
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Documentation will be available at `http://localhost:8080`
 
-## Additional Resources
+## 🚀 Deployment
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Build the application:
+   ```bash
+   ng build --configuration production
+   ```
+   
+2. The production build will be available in the `dist/` directory.
+
+3. For deployment, serve the contents of the `dist/` directory using any static file server, such as:
+   ```bash
+   npx serve -s dist/angular-meteo-test
+   ```
+   
+   Or deploy to platforms like:
+   - Vercel
+   - Netlify
+   - GitHub Pages
+   - Firebase Hosting
+
