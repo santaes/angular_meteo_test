@@ -8,98 +8,320 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	   <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/dark.css">
+	    <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body>
-          <script>
-               // Blocking script to avoid flickering dark mode
-               // Dark mode toggle button
-               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
-               var darkModeState = useDark.matches;
-               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
-               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-               function checkToggle(check) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].checked = check;
-                    }
-               }
-
-               function toggleDarkMode(state) {
-                    if (window.localStorage) {
-                         localStorage.setItem('compodoc_darkmode-state', state);
-                    }
-
-                    checkToggle(state);
-
-                    const hasClass = document.body.classList.contains('dark');
-
-                    if (state) {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.add('dark');
-                         }
-                         if (!hasClass) {
-                              document.body.classList.add('dark');
-                         }
-                    } else {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.remove('dark');
-                         }
-                         if (hasClass) {
-                              document.body.classList.remove('dark');
-                         }
-                    }
-               }
-
-               useDark.addEventListener('change', function (evt) {
-                    toggleDarkMode(evt.matches);
-               });
-               if (darkModeStateLocal) {
-                    darkModeState = darkModeStateLocal === 'true';
-               }
-               toggleDarkMode(darkModeState);
-          </script>
-          <script>
-              // --- Iframe navigation tracking for Template Playground ---
-              function sendCurrentUrlToParent() {
-                  if (window.parent && window.parent !== window) {
-                      window.parent.postMessage({
-                          type: 'compodoc-iframe-navigate',
-                          url: window.location.pathname + window.location.hash
-                      }, '*');
-                  }
-              }
-              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
-              window.addEventListener('popstate', sendCurrentUrlToParent, false);
-              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
-          </script>
-
-        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
-               <div class="d-flex">
-                    <a href="./" class="navbar-brand">angular-meteo-test documentation</a>
-                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
-               </div>
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">angular-meteo-test documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./">angular-meteo-test documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a  href="./overview.html" 
+                                        
+                                         href="./overview.html" 
+                                        
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="modules/TemplatePlaygroundModule.html" >TemplatePlaygroundModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="components/App.html" >App</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TemplatePlaygroundComponent.html" >TemplatePlaygroundComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="injectables/HbsRenderService.html" >HbsRenderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/TemplateEditorService.html" >TemplateEditorService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ZipExportService.html" >ZipExportService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="interfaces/CompoDocConfig.html" >CompoDocConfig</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/DataPoint.html" >DataPoint</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/MinuteData.html" >MinuteData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Session.html" >Session</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Template.html" >Template</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/YamlData.html" >YamlData</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="d-none d-md-block menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./">angular-meteo-test documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a  href="./overview.html" 
+                                               
+                                                href="./overview.html" 
+                                               
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="modules/TemplatePlaygroundModule.html" >TemplatePlaygroundModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="components/App.html" >App</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TemplatePlaygroundComponent.html" >TemplatePlaygroundComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="injectables/HbsRenderService.html" >HbsRenderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/TemplateEditorService.html" >TemplateEditorService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/ZipExportService.html" >ZipExportService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="interfaces/CompoDocConfig.html" >CompoDocConfig</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/DataPoint.html" >DataPoint</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/MinuteData.html" >MinuteData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Session.html" >Session</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Template.html" >Template</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/YamlData.html" >YamlData</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content readme">
                    <div class="content-data">
-
-
-<h1>🌤️ Angular Meteo Dashboard</h1>
+<h1 id="-angular-meteo-dashboard">🌤️ Angular Meteo Dashboard</h1>
+<h1 id="screenshot-is-located-in-the-assets-folder-as-screenshot-png">Screenshot is located in the /assets folder as &quot;screenshot.png&quot;</h1>
 <p>A real-time monitoring dashboard for energy production and temperature data, built with Angular 20.3.0. This application displays live data visualizations and historical metrics in an intuitive interface.</p>
-<h2>✨ Features</h2>
+<h2 id="-features">✨ Features</h2>
 <ul>
 <li><p><strong>Real-time Data Display</strong></p>
 <ul>
@@ -131,113 +353,103 @@
 </ul>
 </li>
 </ul>
-<h2>🚀 Getting Started</h2>
-<h3>Prerequisites</h3>
+<h2 id="-getting-started">🚀 Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
 <ul>
 <li>Node.js (v16 or later)</li>
 <li>npm (v8 or later) or Yarn</li>
 <li>Angular CLI (v20.3.0 or later)</li>
 </ul>
-<h3>Installation</h3>
+<h3 id="installation">Installation</h3>
 <ol>
 <li><p>Clone the repository:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">git clone [repository-url]
-cd angular_meteo_test</code></pre></div></li>
+<pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> [repository-url]<br><span class="hljs-built_in">cd</span> angular_meteo_test</code></pre></li>
 <li><p>Install dependencies:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install
-# or
-yarn install</code></pre></div></li>
+<pre><code class="hljs bash">npm install<br><span class="hljs-comment"># or</span><br>yarn install</code></pre></li>
 <li><p>Start the development server:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng serve</code></pre></div></li>
+<pre><code class="hljs bash">ng serve</code></pre></li>
 <li><p>Open your browser and navigate to <code>http://localhost:4200/</code></p>
 </li>
 </ol>
-<h2>📊 Data Structure</h2>
+<h2 id="-data-structure">📊 Data Structure</h2>
 <p>The application uses simulated data with the following structure:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">interface DataPoint {
-  time: string;        // Format: &quot;HH:MM:SS&quot;
-  value: number;       // Raw value
-}
-
-interface YamlData {
-  power: {
-    unit: string;      // &quot;MW&quot;
-    values: DataPoint[];
-  };
-  temperature: {
-    unit: string;      // &quot;dK&quot; (deciKelvin)
-    values: DataPoint[];
-  };
-}</code></pre></div><h2>🛠️ Development</h2>
-<h3>Data Source</h3>
-<p>The application loads real data from <code>src/assets/data.yml</code> with the following structure:</p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> DataPoint {<br>  time: <span class="hljs-built_in">string</span>;        <span class="hljs-comment">// Format: "HH:MM:SS"</span><br>  value: <span class="hljs-built_in">number</span>;       <span class="hljs-comment">// Raw value</span><br>}<br><br><span class="hljs-keyword">interface</span> YamlData {<br>  power: {<br>    unit: <span class="hljs-built_in">string</span>;      <span class="hljs-comment">// "MW"</span><br>    values: DataPoint[];<br>  };<br>  temperature: {<br>    unit: <span class="hljs-built_in">string</span>;      <span class="hljs-comment">// "dK" (deciKelvin)</span><br>    values: DataPoint[];<br>  };<br>}</code></pre><h2 id="-development">🛠️ Development</h2>
+<h3 id="data-source">Data Source</h3>
+<p>The application loads data from the root <code>data.yml</code> file with the following structure:</p>
 <ul>
 <li>Power values in MW (Megawatts)</li>
 <li>Temperature values in dK (deciKelvin)</li>
 <li>Data points recorded at 5-second intervals</li>
 </ul>
 <p>The YAML file should follow this structure:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-yaml">power:
-  unit: &#39;MW&#39;
-  values:
-    - { time: &#39;00:00:00&#39;, value: 54.5 }
-    - { time: &#39;00:00:05&#39;, value: 54.7 }
-    # ... more data points
-
-temperature:
-  unit: &#39;dK&#39;
-  values:
-    - { time: &#39;00:00:00&#39;, value: 2920 }
-    - { time: &#39;00:00:05&#39;, value: 2921 }
-    # ... more data points</code></pre></div><h3>Key Components</h3>
+<pre><code class="hljs yaml"><span class="hljs-attr">power:</span><br>  <span class="hljs-attr">unit:</span> <span class="hljs-string">'MW'</span><br>  <span class="hljs-attr">values:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">{</span> <span class="hljs-attr">time:</span> <span class="hljs-string">'00:00:00'</span><span class="hljs-string">,</span> <span class="hljs-attr">value:</span> <span class="hljs-number">54.5</span> <span class="hljs-string">}</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">{</span> <span class="hljs-attr">time:</span> <span class="hljs-string">'00:00:05'</span><span class="hljs-string">,</span> <span class="hljs-attr">value:</span> <span class="hljs-number">54.7</span> <span class="hljs-string">}</span><br>    <span class="hljs-comment"># ... more data points</span><br><br><span class="hljs-attr">temperature:</span><br>  <span class="hljs-attr">unit:</span> <span class="hljs-string">'dK'</span><br>  <span class="hljs-attr">values:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">{</span> <span class="hljs-attr">time:</span> <span class="hljs-string">'00:00:00'</span><span class="hljs-string">,</span> <span class="hljs-attr">value:</span> <span class="hljs-number">2920</span> <span class="hljs-string">}</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">{</span> <span class="hljs-attr">time:</span> <span class="hljs-string">'00:00:05'</span><span class="hljs-string">,</span> <span class="hljs-attr">value:</span> <span class="hljs-number">2921</span> <span class="hljs-string">}</span><br>    <span class="hljs-comment"># ... more data points</span></code></pre><h3 id="key-features">Key Features</h3>
 <ul>
-<li><strong>app.component.ts</strong>: Main application logic and data handling</li>
-<li><strong>app.component.html</strong>: UI layout and templates</li>
+<li><p><strong>Real-time Data Processing</strong></p>
+<ul>
+<li>Loads and parses YAML data</li>
+<li>Converts MW to kWh for energy display</li>
+<li>Converts deciKelvin to Celsius for temperature</li>
+<li>Handles data synchronization between power and temperature metrics</li>
+</ul>
+</li>
+<li><p><strong>Error Handling</strong></p>
+<ul>
+<li>Graceful fallback to simulated data on errors</li>
+<li>Comprehensive error logging</li>
+<li>Data validation and bounds checking</li>
+</ul>
+</li>
+</ul>
+<h3 id="key-components">Key Components</h3>
+<ul>
+<li><strong>app.ts</strong>: Main application component with data handling and processing logic</li>
+<li><strong>app.component.html</strong>: UI layout and templates with responsive design</li>
 <li><strong>app.component.scss</strong>: Styling and theming</li>
+<li><strong>data.yml</strong>: Data source file in the project root</li>
 </ul>
-<h2>🏗️ Project Structure</h2>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">src/
-├── app/
-│   ├── app.component.ts      # Main application component
-│   ├── app.component.html    # Main template
-│   ├── app.component.scss    # Styles
-│   └── app.config.ts         # Application configuration
-├── assets/
-│   └── data/                # Data files
-└── styles.scss              # Global styles</code></pre></div><h2>🧪 Testing</h2>
-<p>Run unit tests:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng test</code></pre></div><p>Run end-to-end tests:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng e2e</code></pre></div><h2>🚀 Deployment</h2>
-<p>Build for production:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng build --configuration production</code></pre></div><p>The build artifacts will be stored in the <code>dist/</code> directory.</p>
-<h2>📝 License</h2>
-<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
-<h2>🙏 Acknowledgments</h2>
+<h2 id="-project-structure">🏗️ Project Structure</h2>
+<pre><code class="hljs undefined">angular_meteo_test/<br>├── data.yml                  # Main data source file<br>├── src/<br>│   ├── app/<br>│   │   ├── app.ts           # Main application component<br>│   │   ├── app.component.html # Main template<br>│   │   └── app.component.scss # Styles<br>│   ├── assets/              # Static assets<br>│   └── styles.scss          # Global styles<br>├── tsconfig.doc.json        # Documentation config<br>└── package.json             # Project dependencies</code></pre><h2 id="-data-processing">📊 Data Processing</h2>
+<p>The application processes data with the following conversions:</p>
+<ol>
+<li><p><strong>Power Conversion</strong></p>
 <ul>
-<li>Built with <a href="https://angular.io/">Angular</a></li>
-<li>Icons by <a href="https://fontawesome.com/">Font Awesome</a></li>
-<li>Charts rendered with SVG</li>
+<li>Input: MW (Megawatts)</li>
+<li>Output: kWh (kilowatt-hours)</li>
+<li>Formula: <code>kWh = MW * 1000 * (5/3600)</code> (for 5-second intervals)</li>
 </ul>
-<hr>
-<div align="center">
-  Made with ❤️ by [Your Name]
-</div>
-
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng e2e</code></pre></div><p>Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.</p>
-<h2>Additional Resources</h2>
-<p>For more information on using the Angular CLI, including detailed command references, visit the <a href="https://angular.dev/tools/cli">Angular CLI Overview and Command Reference</a> page.</p>
-
-
-
-
-
-
-
-
-
-
-
-
+</li>
+<li><p><strong>Temperature Conversion</strong></p>
+<ul>
+<li>Input: dK (deciKelvin)</li>
+<li>Output: °C (Celsius)</li>
+<li>Formula: <code>°C = (dK / 10) - 273.15</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="-development">🧪 Development</h2>
+<h2 id="testing">Testing</h2>
+<h1 id="run-tests">Run tests</h1>
+<p>npm run test / ng test</p>
+<h3 id="running-the-application">Running the Application</h3>
+<pre><code class="hljs bash"><span class="hljs-comment"># Install dependencies</span><br>npm install<br><br><span class="hljs-comment"># Start development server</span><br>ng serve<br><br><span class="hljs-comment"># Build for production</span><br>ng build --configuration production</code></pre><h3 id="documentation">Documentation</h3>
+<p>Generate project documentation using Compodoc:</p>
+<pre><code class="hljs bash">npx compodoc -p tsconfig.doc.json --disableSourceCode</code></pre><p>Documentation will be available at <code>http://localhost:8080</code></p>
+<h2 id="-deployment">🚀 Deployment</h2>
+<ol>
+<li><p>Build the application:</p>
+<pre><code class="hljs bash">ng build --configuration production</code></pre></li>
+<li><p>The production build will be available in the <code>dist/</code> directory.</p>
+</li>
+<li><p>For deployment, serve the contents of the <code>dist/</code> directory using any static file server, such as:</p>
+<pre><code class="hljs bash">npx serve -s dist/angular-meteo-test</code></pre><p>Or deploy to platforms like:</p>
+<ul>
+<li>Vercel</li>
+<li>Netlify</li>
+<li>GitHub Pages</li>
+<li>Firebase Hosting</li>
+</ul>
+</li>
+</ol>
 
 
 
@@ -260,64 +472,32 @@ temperature:
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
-            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script>
-               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               checkToggle(darkModeState);
-               if ($darkModeToggleSwitchers.length > 0) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
-                              darkModeState = !darkModeState;
-                              toggleDarkMode(darkModeState);
-                         });
-                    }
-               }
-          </script>
-
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
-
-       <script src="./js/menu-wc.js" defer></script>
-       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
 
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/highlight.pack.js"></script>
+       <script src="./js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="./js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>

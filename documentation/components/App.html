@@ -8,125 +8,325 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css">
+	    <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
-          <script>
-               // Blocking script to avoid flickering dark mode
-               // Dark mode toggle button
-               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
-               var darkModeState = useDark.matches;
-               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
-               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-               function checkToggle(check) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].checked = check;
-                    }
-               }
-
-               function toggleDarkMode(state) {
-                    if (window.localStorage) {
-                         localStorage.setItem('compodoc_darkmode-state', state);
-                    }
-
-                    checkToggle(state);
-
-                    const hasClass = document.body.classList.contains('dark');
-
-                    if (state) {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.add('dark');
-                         }
-                         if (!hasClass) {
-                              document.body.classList.add('dark');
-                         }
-                    } else {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.remove('dark');
-                         }
-                         if (hasClass) {
-                              document.body.classList.remove('dark');
-                         }
-                    }
-               }
-
-               useDark.addEventListener('change', function (evt) {
-                    toggleDarkMode(evt.matches);
-               });
-               if (darkModeStateLocal) {
-                    darkModeState = darkModeStateLocal === 'true';
-               }
-               toggleDarkMode(darkModeState);
-          </script>
-          <script>
-              // --- Iframe navigation tracking for Template Playground ---
-              function sendCurrentUrlToParent() {
-                  if (window.parent && window.parent !== window) {
-                      window.parent.postMessage({
-                          type: 'compodoc-iframe-navigate',
-                          url: window.location.pathname + window.location.hash
-                      }, '*');
-                  }
-              }
-              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
-              window.addEventListener('popstate', sendCurrentUrlToParent, false);
-              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
-          </script>
-
-        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
-               <div class="d-flex">
-                    <a href="../" class="navbar-brand">angular-meteo-test documentation</a>
-                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
-               </div>
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">angular-meteo-test documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">angular-meteo-test documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/TemplatePlaygroundModule.html" >TemplatePlaygroundModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/App.html"  class="active" >App</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TemplatePlaygroundComponent.html" >TemplatePlaygroundComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/HbsRenderService.html" >HbsRenderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/TemplateEditorService.html" >TemplateEditorService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ZipExportService.html" >ZipExportService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/CompoDocConfig.html" >CompoDocConfig</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DataPoint.html" >DataPoint</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/MinuteData.html" >MinuteData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Session.html" >Session</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Template.html" >Template</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/YamlData.html" >YamlData</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="d-none d-md-block menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">angular-meteo-test documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/TemplatePlaygroundModule.html" >TemplatePlaygroundModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/App.html"  class="active" >App</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TemplatePlaygroundComponent.html" >TemplatePlaygroundComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/HbsRenderService.html" >HbsRenderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/TemplateEditorService.html" >TemplateEditorService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ZipExportService.html" >ZipExportService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/CompoDocConfig.html" >CompoDocConfig</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DataPoint.html" >DataPoint</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/MinuteData.html" >MinuteData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Session.html" >Session</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Template.html" >Template</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/YamlData.html" >YamlData</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
 
 
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Components</li>
-  <li class="breadcrumb-item"
-  >
-  App</li>
+  <li>Components</li>
+  <li>App</li>
 </ol>
 
-<ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a href="#info" class="nav-link active"
-                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
-            <a href="#tree" class="nav-link"
-                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
-        </li>
-</ul>
 
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
+<p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -135,19 +335,9 @@
 
 
 
-
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
-    </p>
-
-
-<section data-compodoc="block-metadata">
+<section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
+    <table class="table table-sm table-hover">
         <tbody>
 
 
@@ -164,18 +354,6 @@
             <tr>
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>app-root</code></td>
-            </tr>
-
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
-
-            <tr>
-                <td class="col-md-3">imports</td>
-                <td class="col-md-9">
-                            <code>CommonModule</code>
-                </td>
             </tr>
 
 
@@ -411,7 +589,7 @@
       margin-bottom: 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
 
@@ -439,6 +617,7 @@
       padding: 30px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       transition: transform 0.3s;
@@ -517,6 +696,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      
     }
 
     th, td {
@@ -539,250 +719,8 @@
 
             <tr>
                 <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;tooltip&quot; *ngIf&#x3D;&quot;hoveredPoint&quot; [ngStyle]&#x3D;&quot;{&#x27;left.px&#x27;: tooltipX, &#x27;top.px&#x27;: tooltipY}&quot;&gt;
-  &lt;div class&#x3D;&quot;tooltip-time&quot;&gt;{{ hoveredPoint.displayTime }}&lt;/div&gt;
-  &lt;div class&#x3D;&quot;tooltip-value&quot; *ngIf&#x3D;&quot;hoveredPoint.powerKWh !&#x3D;&#x3D; undefined&quot;&gt;
-    &lt;span&gt;Energía:&lt;/span&gt; {{ hoveredPoint.powerKWh.toFixed(3) }} kWh
-  &lt;/div&gt;
-  &lt;div class&#x3D;&quot;tooltip-value&quot; *ngIf&#x3D;&quot;hoveredPoint.tempCelsius !&#x3D;&#x3D; undefined&quot;&gt;
-    &lt;span&gt;Temperatura:&lt;/span&gt; {{ hoveredPoint.tempCelsius.toFixed(2) }}°C
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class&#x3D;&quot;dashboard&quot;&gt;
-  &lt;header&gt;
-    &lt;h1&gt;⚡ Dashboard de Monitoreo en Tiempo Real&lt;/h1&gt;
-    &lt;div class&#x3D;&quot;current-time&quot;&gt;{{ currentTime() }}&lt;/div&gt;
-  &lt;/header&gt;
-
-  &lt;!-- Sección de Valores Actuales --&gt;
-  &lt;section class&#x3D;&quot;current-values&quot;&gt;
-    &lt;div class&#x3D;&quot;value-card power&quot;&gt;
-      &lt;div class&#x3D;&quot;icon&quot;&gt;⚡&lt;/div&gt;
-      &lt;div class&#x3D;&quot;content&quot;&gt;
-        &lt;h3&gt;Energía Producida&lt;/h3&gt;
-        &lt;div class&#x3D;&quot;value&quot;&gt;{{ currentPowerKWh() }} &lt;span&gt;kWh&lt;/span&gt;&lt;/div&gt;
-        &lt;div class&#x3D;&quot;subtitle&quot;&gt;Última actualización: {{ lastUpdate() }}&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;value-card temperature&quot;&gt;
-      &lt;div class&#x3D;&quot;icon&quot;&gt;🌡️&lt;/div&gt;
-      &lt;div class&#x3D;&quot;content&quot;&gt;
-        &lt;h3&gt;Temperatura Media&lt;/h3&gt;
-        &lt;div class&#x3D;&quot;value&quot;&gt;{{ currentTempCelsius() }} &lt;span&gt;°C&lt;/span&gt;&lt;/div&gt;
-        &lt;div class&#x3D;&quot;subtitle&quot;&gt;Última actualización: {{ lastUpdate() }}&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
-
-  &lt;!-- Gráficas --&gt;
-  &lt;section class&#x3D;&quot;charts&quot;&gt;
-    &lt;div class&#x3D;&quot;chart-container&quot;&gt;
-      &lt;h2&gt;📊 Energía Producida (kWh) - Por Minuto&lt;/h2&gt;
-      &lt;svg width&#x3D;&quot;100%&quot; height&#x3D;&quot;300&quot; #powerChart&gt;
-        &lt;g transform&#x3D;&quot;translate(50, 20)&quot;&gt;
-          &lt;!-- Grid lines --&gt;
-          @for (i of [0, 1, 2, 3, 4]; track i) {
-            &lt;line
-              [attr.x1]&#x3D;&quot;0&quot;
-              [attr.y1]&#x3D;&quot;i * 60&quot;
-              [attr.x2]&#x3D;&quot;chartWidth()&quot;
-              [attr.y2]&#x3D;&quot;i * 60&quot;
-              stroke&#x3D;&quot;#e0e0e0&quot;
-              stroke-dasharray&#x3D;&quot;5,5&quot;
-            /&gt;
-          }
-
-          &lt;!-- Power line --&gt;
-          @if (minuteData().length &gt; 1) {
-            &lt;polyline
-              [attr.points]&#x3D;&quot;getPowerPoints()&quot;
-              fill&#x3D;&quot;none&quot;
-              stroke&#x3D;&quot;#ff6b6b&quot;
-              stroke-width&#x3D;&quot;2&quot;
-            /&gt;
-
-            &lt;!-- Data points --&gt;
-            @for (point of minuteData(); track point.timestamp; let i &#x3D; $index) {
-              &lt;circle
-                class&#x3D;&quot;data-point&quot;
-                [attr.cx]&#x3D;&quot;getX(i)&quot;
-                [attr.cy]&#x3D;&quot;getPowerY(point.powerKWh)&quot;
-                r&#x3D;&quot;4&quot;
-                fill&#x3D;&quot;#ff6b6b&quot;
-                (mouseenter)&#x3D;&quot;showTooltip($event, point)&quot;
-                (mouseleave)&#x3D;&quot;hideTooltip()&quot;
-              /&gt;
-            }
-          }
-
-          &lt;!-- Axes --&gt;
-          &lt;line x1&#x3D;&quot;0&quot; y1&#x3D;&quot;240&quot; [attr.x2]&#x3D;&quot;chartWidth()&quot; y2&#x3D;&quot;240&quot; stroke&#x3D;&quot;#333&quot; stroke-width&#x3D;&quot;2&quot;/&gt;
-          &lt;line x1&#x3D;&quot;0&quot; y1&#x3D;&quot;0&quot; x2&#x3D;&quot;0&quot; y2&#x3D;&quot;240&quot; stroke&#x3D;&quot;#333&quot; stroke-width&#x3D;&quot;2&quot;/&gt;
-
-          &lt;!-- Labels --&gt;
-          @for (point of getXLabels(); track point.uniqueKey) {
-            &lt;text
-              [attr.x]&#x3D;&quot;point.x&quot;
-              y&#x3D;&quot;260&quot;
-              text-anchor&#x3D;&quot;middle&quot;
-              font-size&#x3D;&quot;12&quot;
-            &gt;
-              {{ point.displayTime }}
-            &lt;/text&gt;
-          }
-        &lt;/g&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;chart-container&quot;&gt;
-      &lt;h2&gt;🌡️ Temperatura Media (°C) - Por Minuto&lt;/h2&gt;
-      &lt;svg width&#x3D;&quot;100%&quot; height&#x3D;&quot;300&quot; #tempChart&gt;
-        &lt;g transform&#x3D;&quot;translate(50, 20)&quot;&gt;
-          &lt;!-- Grid lines --&gt;
-          @for (i of [0, 1, 2, 3, 4]; track i) {
-            &lt;line
-              [attr.x1]&#x3D;&quot;0&quot;
-              [attr.y1]&#x3D;&quot;i * 60&quot;
-              [attr.x2]&#x3D;&quot;chartWidth()&quot;
-              [attr.y2]&#x3D;&quot;i * 60&quot;
-              stroke&#x3D;&quot;#e0e0e0&quot;
-              stroke-dasharray&#x3D;&quot;5,5&quot;
-            /&gt;
-          }
-
-          &lt;!-- Temperature line --&gt;
-          @if (minuteData().length &gt; 1) {
-            &lt;polyline
-              [attr.points]&#x3D;&quot;getTempPoints()&quot;
-              fill&#x3D;&quot;none&quot;
-              stroke&#x3D;&quot;#4ecdc4&quot;
-              stroke-width&#x3D;&quot;2&quot;
-            /&gt;
-
-            &lt;!-- Data points --&gt;
-            @for (point of minuteData(); track point.timestamp; let i &#x3D; $index) {
-              &lt;circle
-                class&#x3D;&quot;data-point&quot;
-                [attr.cx]&#x3D;&quot;getX(i)&quot;
-                [attr.cy]&#x3D;&quot;getTempY(point.tempCelsius)&quot;
-                r&#x3D;&quot;4&quot;
-                fill&#x3D;&quot;#4ecdc4&quot;
-                (mouseenter)&#x3D;&quot;showTooltip($event, point)&quot;
-                (mouseleave)&#x3D;&quot;hideTooltip()&quot;
-              /&gt;
-            }
-          }
-
-          &lt;!-- Axes --&gt;
-          &lt;line x1&#x3D;&quot;0&quot; y1&#x3D;&quot;240&quot; [attr.x2]&#x3D;&quot;chartWidth()&quot; y2&#x3D;&quot;240&quot; stroke&#x3D;&quot;#333&quot; stroke-width&#x3D;&quot;2&quot;/&gt;
-          &lt;line x1&#x3D;&quot;0&quot; y1&#x3D;&quot;0&quot; x2&#x3D;&quot;0&quot; y2&#x3D;&quot;240&quot; stroke&#x3D;&quot;#333&quot; stroke-width&#x3D;&quot;2&quot;/&gt;
-
-          &lt;!-- Labels --&gt;
-          @for (point of getXLabels(); track point.uniqueKey) {
-            &lt;text
-              [attr.x]&#x3D;&quot;point.x&quot;
-              y&#x3D;&quot;260&quot;
-              text-anchor&#x3D;&quot;middle&quot;
-              font-size&#x3D;&quot;12&quot;
-            &gt;
-              {{ point.displayTime }}
-            &lt;/text&gt;
-          }
-        &lt;/g&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
-
-  &lt;!-- Tabla de datos recientes --&gt;
-  &lt;section class&#x3D;&quot;data-table&quot;&gt;
-    &lt;div class&#x3D;&quot;table-header&quot;&gt;
-      &lt;h2&gt;📋 Historial de Datos&lt;/h2&gt;
-      &lt;div class&#x3D;&quot;page-size-selector&quot;&gt;
-        &lt;span&gt;Mostrar:&lt;/span&gt;
-        &lt;select (change)&#x3D;&quot;changePageSize($any($event.target).value)&quot; [value]&#x3D;&quot;itemsPerPage&quot;&gt;
-          @for (size of pageSizes; track size) {
-            &lt;option [value]&#x3D;&quot;size&quot;&gt;{{ size }} por página&lt;/option&gt;
-          }
-        &lt;/select&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;table-container&quot;&gt;
-      &lt;table&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;
-            &lt;th class&#x3D;&quot;time-header&quot;&gt;Hora&lt;/th&gt;
-            &lt;th class&#x3D;&quot;number-header&quot;&gt;Energía (kWh)&lt;/th&gt;
-            &lt;th class&#x3D;&quot;number-header&quot;&gt;Temperatura (°C)&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-          @for (data of paginatedData; track data.uniqueKey) {
-            &lt;tr&gt;
-              &lt;td class&#x3D;&quot;time-cell&quot;&gt;{{ data.displayTime }}&lt;/td&gt;
-              &lt;td class&#x3D;&quot;number-cell&quot;&gt;{{ data.powerKWh.toFixed(2) }}&lt;/td&gt;
-              &lt;td class&#x3D;&quot;number-cell&quot;&gt;{{ data.tempCelsius.toFixed(2) }}&lt;/td&gt;
-            &lt;/tr&gt;
-          }
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;pagination-controls&quot;&gt;
-      &lt;button
-        (click)&#x3D;&quot;changePage(1)&quot;
-        [disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; 1&quot;
-        [class.disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; 1&quot;&gt;
-        &amp;laquo;
-      &lt;/button&gt;
-      &lt;button
-        (click)&#x3D;&quot;changePage(currentPage - 1)&quot;
-        [disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; 1&quot;
-        [class.disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; 1&quot;&gt;
-        &amp;lsaquo;
-      &lt;/button&gt;
-
-      @for (page of getPageNumbers(); track page) {
-        @if (page &#x3D;&#x3D;&#x3D; &#x27;...&#x27;) {
-          &lt;span class&#x3D;&quot;ellipsis&quot;&gt;...&lt;/span&gt;
-        } @else {
-          &lt;button
-            (click)&#x3D;&quot;changePage(+page)&quot;
-            [class.active]&#x3D;&quot;page &#x3D;&#x3D;&#x3D; currentPage&quot;&gt;
-            {{ page }}
-          &lt;/button&gt;
-        }
-      }
-
-      &lt;button
-        (click)&#x3D;&quot;changePage(currentPage + 1)&quot;
-        [disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; totalPages&quot;
-        [class.disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; totalPages&quot;&gt;
-        &amp;rsaquo;
-      &lt;/button&gt;
-      &lt;button
-        (click)&#x3D;&quot;changePage(totalPages)&quot;
-        [disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; totalPages&quot;
-        [class.disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; totalPages&quot;&gt;
-        &amp;raquo;
-      &lt;/button&gt;
-
-      &lt;span class&#x3D;&quot;page-info&quot;&gt;
-        Página {{ currentPage }} de {{ totalPages }} ({{ minuteData().length }} registros)
-      &lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-9"><code>&lt;div&nbsp;class&#x3D;&quot;tooltip&quot;&nbsp;*ngIf&#x3D;&quot;hoveredPoint&quot;&nbsp;[ngStyle]&#x3D;&quot;{&#x27;left.px&#x27;:&nbsp;tooltipX,&nbsp;&#x27;top.px&#x27;:&nbsp;tooltipY}&quot;&gt;<br>&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;tooltip-time&quot;&gt;{{&nbsp;hoveredPoint.displayTime&nbsp;}}&lt;/div&gt;<br>&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;tooltip-value&quot;&nbsp;*ngIf&#x3D;&quot;hoveredPoint.powerKWh&nbsp;!&#x3D;&#x3D;&nbsp;undefined&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;Energía:&lt;/span&gt;&nbsp;{{&nbsp;hoveredPoint.powerKWh.toFixed(3)&nbsp;}}&nbsp;kWh<br>&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;tooltip-value&quot;&nbsp;*ngIf&#x3D;&quot;hoveredPoint.tempCelsius&nbsp;!&#x3D;&#x3D;&nbsp;undefined&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;Temperatura:&lt;/span&gt;&nbsp;{{&nbsp;hoveredPoint.tempCelsius.toFixed(2)&nbsp;}}°C<br>&nbsp;&nbsp;&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;div&nbsp;class&#x3D;&quot;dashboard&quot;&gt;<br>&nbsp;&nbsp;&lt;header&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;current-time&quot;&gt;{{&nbsp;currentTime()&nbsp;}}&lt;/div&gt;<br>&nbsp;&nbsp;&lt;/header&gt;<br><br>&nbsp;&nbsp;&lt;!--&nbsp;Sección&nbsp;de&nbsp;Valores&nbsp;Actuales&nbsp;--&gt;<br>&nbsp;&nbsp;&lt;section&nbsp;class&#x3D;&quot;current-values&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;value-card&nbsp;power&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;icon&quot;&gt;⚡&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;content&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;Energía&nbsp;Producida&lt;/h3&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;value&quot;&gt;{{&nbsp;currentPowerKWh()&nbsp;}}&nbsp;&lt;span&gt;kWh&lt;/span&gt;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;subtitle&quot;&gt;Última&nbsp;actualización:&nbsp;{{&nbsp;lastUpdate()&nbsp;}}&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;value-card&nbsp;temperature&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;icon&quot;&gt;🌡️&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;content&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;Temperatura&nbsp;Media&lt;/h3&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;value&quot;&gt;{{&nbsp;currentTempCelsius()&nbsp;}}&nbsp;&lt;span&gt;°C&lt;/span&gt;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;subtitle&quot;&gt;Última&nbsp;actualización:&nbsp;{{&nbsp;lastUpdate()&nbsp;}}&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&lt;/section&gt;<br><br>&nbsp;&nbsp;&lt;!--&nbsp;Gráficas&nbsp;--&gt;<br>&nbsp;&nbsp;&lt;section&nbsp;class&#x3D;&quot;charts&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;chart-container&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;📊&nbsp;Energía&nbsp;Producida&nbsp;(kWh)&nbsp;-&nbsp;Por&nbsp;Minuto&lt;/h2&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;svg&nbsp;width&#x3D;&quot;100%&quot;&nbsp;height&#x3D;&quot;300&quot;&nbsp;#powerChart&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;g&nbsp;transform&#x3D;&quot;translate(50,&nbsp;20)&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Grid&nbsp;lines&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(i&nbsp;of&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4];&nbsp;track&nbsp;i)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;line<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.x1]&#x3D;&quot;0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.y1]&#x3D;&quot;i&nbsp;*&nbsp;60&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.x2]&#x3D;&quot;chartWidth()&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.y2]&#x3D;&quot;i&nbsp;*&nbsp;60&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke&#x3D;&quot;#e0e0e0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke-dasharray&#x3D;&quot;5,5&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Power&nbsp;line&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@if&nbsp;(minuteData().length&nbsp;&gt;&nbsp;1)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;polyline<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.points]&#x3D;&quot;getPowerPoints()&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill&#x3D;&quot;none&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke&#x3D;&quot;#ff6b6b&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke-width&#x3D;&quot;2&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Data&nbsp;points&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(point&nbsp;of&nbsp;minuteData();&nbsp;track&nbsp;point.timestamp;&nbsp;let&nbsp;i&nbsp;&#x3D;&nbsp;$index)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;circle<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class&#x3D;&quot;data-point&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.cx]&#x3D;&quot;getX(i)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.cy]&#x3D;&quot;getPowerY(point.powerKWh)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r&#x3D;&quot;4&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill&#x3D;&quot;#ff6b6b&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mouseenter)&#x3D;&quot;showTooltip($event,&nbsp;point)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mouseleave)&#x3D;&quot;hideTooltip()&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Axes&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;line&nbsp;x1&#x3D;&quot;0&quot;&nbsp;y1&#x3D;&quot;240&quot;&nbsp;[attr.x2]&#x3D;&quot;chartWidth()&quot;&nbsp;y2&#x3D;&quot;240&quot;&nbsp;stroke&#x3D;&quot;#333&quot;&nbsp;stroke-width&#x3D;&quot;2&quot;/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;line&nbsp;x1&#x3D;&quot;0&quot;&nbsp;y1&#x3D;&quot;0&quot;&nbsp;x2&#x3D;&quot;0&quot;&nbsp;y2&#x3D;&quot;240&quot;&nbsp;stroke&#x3D;&quot;#333&quot;&nbsp;stroke-width&#x3D;&quot;2&quot;/&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Labels&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(point&nbsp;of&nbsp;getXLabels();&nbsp;track&nbsp;point.uniqueKey)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;text<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.x]&#x3D;&quot;point.x&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&#x3D;&quot;260&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-anchor&#x3D;&quot;middle&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size&#x3D;&quot;12&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{&nbsp;point.displayTime&nbsp;}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/text&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/g&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/svg&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;chart-container&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;🌡️&nbsp;Temperatura&nbsp;Media&nbsp;(°C)&nbsp;-&nbsp;Por&nbsp;Minuto&lt;/h2&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;svg&nbsp;width&#x3D;&quot;100%&quot;&nbsp;height&#x3D;&quot;300&quot;&nbsp;#tempChart&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;g&nbsp;transform&#x3D;&quot;translate(50,&nbsp;20)&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Grid&nbsp;lines&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(i&nbsp;of&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4];&nbsp;track&nbsp;i)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;line<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.x1]&#x3D;&quot;0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.y1]&#x3D;&quot;i&nbsp;*&nbsp;60&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.x2]&#x3D;&quot;chartWidth()&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.y2]&#x3D;&quot;i&nbsp;*&nbsp;60&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke&#x3D;&quot;#e0e0e0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke-dasharray&#x3D;&quot;5,5&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Temperature&nbsp;line&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@if&nbsp;(minuteData().length&nbsp;&gt;&nbsp;1)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;polyline<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.points]&#x3D;&quot;getTempPoints()&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill&#x3D;&quot;none&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke&#x3D;&quot;#4ecdc4&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stroke-width&#x3D;&quot;2&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Data&nbsp;points&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(point&nbsp;of&nbsp;minuteData();&nbsp;track&nbsp;point.timestamp;&nbsp;let&nbsp;i&nbsp;&#x3D;&nbsp;$index)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;circle<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class&#x3D;&quot;data-point&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.cx]&#x3D;&quot;getX(i)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.cy]&#x3D;&quot;getTempY(point.tempCelsius)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r&#x3D;&quot;4&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill&#x3D;&quot;#4ecdc4&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mouseenter)&#x3D;&quot;showTooltip($event,&nbsp;point)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mouseleave)&#x3D;&quot;hideTooltip()&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Axes&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;line&nbsp;x1&#x3D;&quot;0&quot;&nbsp;y1&#x3D;&quot;240&quot;&nbsp;[attr.x2]&#x3D;&quot;chartWidth()&quot;&nbsp;y2&#x3D;&quot;240&quot;&nbsp;stroke&#x3D;&quot;#333&quot;&nbsp;stroke-width&#x3D;&quot;2&quot;/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;line&nbsp;x1&#x3D;&quot;0&quot;&nbsp;y1&#x3D;&quot;0&quot;&nbsp;x2&#x3D;&quot;0&quot;&nbsp;y2&#x3D;&quot;240&quot;&nbsp;stroke&#x3D;&quot;#333&quot;&nbsp;stroke-width&#x3D;&quot;2&quot;/&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;Labels&nbsp;--&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(point&nbsp;of&nbsp;getXLabels();&nbsp;track&nbsp;point.uniqueKey)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;text<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[attr.x]&#x3D;&quot;point.x&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&#x3D;&quot;260&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-anchor&#x3D;&quot;middle&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size&#x3D;&quot;12&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{&nbsp;point.displayTime&nbsp;}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/text&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/g&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/svg&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&lt;/section&gt;<br><br>&nbsp;&nbsp;&lt;!--&nbsp;Tabla&nbsp;de&nbsp;datos&nbsp;recientes&nbsp;--&gt;<br>&nbsp;&nbsp;&lt;section&nbsp;class&#x3D;&quot;data-table&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;table-header&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;📋&nbsp;Historial&nbsp;de&nbsp;Datos&lt;/h2&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;page-size-selector&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;Mostrar:&lt;/span&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;select&nbsp;id&#x3D;&quot;itemsPerPage&quot;&nbsp;name&#x3D;&quot;itemsPerPage&quot;&nbsp;(change)&#x3D;&quot;changePageSize($any($event.target).value)&quot;&nbsp;[value]&#x3D;&quot;itemsPerPage&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(size&nbsp;of&nbsp;pageSizes;&nbsp;track&nbsp;size)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;[value]&#x3D;&quot;size&quot;&gt;{{&nbsp;size&nbsp;}}&nbsp;por&nbsp;página&lt;/option&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/select&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;table-container&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;table&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;thead&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&nbsp;class&#x3D;&quot;time-header&quot;&gt;Hora&lt;/th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&nbsp;class&#x3D;&quot;number-header&quot;&gt;Energía&nbsp;(kWh)&lt;/th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&nbsp;class&#x3D;&quot;number-header&quot;&gt;Temperatura&nbsp;(°C)&lt;/th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/thead&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tbody&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(data&nbsp;of&nbsp;paginatedData;&nbsp;track&nbsp;data.uniqueKey)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&nbsp;class&#x3D;&quot;time-cell&quot;&gt;{{&nbsp;data.displayTime&nbsp;}}&lt;/td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&nbsp;class&#x3D;&quot;number-cell&quot;&gt;{{&nbsp;data.powerKWh.toFixed(2)&nbsp;}}&lt;/td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&nbsp;class&#x3D;&quot;number-cell&quot;&gt;{{&nbsp;data.tempCelsius.toFixed(2)&nbsp;}}&lt;/td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tbody&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/table&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class&#x3D;&quot;pagination-controls&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(click)&#x3D;&quot;changePage(1)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;1&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[class.disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;1&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;laquo;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(click)&#x3D;&quot;changePage(currentPage&nbsp;-&nbsp;1)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;1&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[class.disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;1&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;lsaquo;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@for&nbsp;(page&nbsp;of&nbsp;getPageNumbers();&nbsp;track&nbsp;page)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@if&nbsp;(page&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;&#x27;...&#x27;)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&nbsp;class&#x3D;&quot;ellipsis&quot;&gt;...&lt;/span&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;@else&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(click)&#x3D;&quot;changePage(+page)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[class.active]&#x3D;&quot;page&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;currentPage&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{&nbsp;page&nbsp;}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(click)&#x3D;&quot;changePage(currentPage&nbsp;+&nbsp;1)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;totalPages&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[class.disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;totalPages&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;rsaquo;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(click)&#x3D;&quot;changePage(totalPages)&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;totalPages&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[class.disabled]&#x3D;&quot;currentPage&nbsp;&#x3D;&#x3D;&#x3D;&nbsp;totalPages&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;raquo;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&nbsp;class&#x3D;&quot;page-info&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Página&nbsp;{{&nbsp;currentPage&nbsp;}}&nbsp;de&nbsp;{{&nbsp;totalPages&nbsp;}}&nbsp;({{&nbsp;minuteData().length&nbsp;}}&nbsp;registros)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/span&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>&nbsp;&nbsp;&lt;/section&gt;<br>&lt;/div&gt;<br></code></td>
             </tr>
-
-
-
-
-
-
 
 
 
@@ -790,1937 +728,750 @@
     </table>
 </section>
 
-    <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#currentPage" >currentPage</a>
-                            </li>
-                            <li>
-                                <a href="#currentPowerKWh" >currentPowerKWh</a>
-                            </li>
-                            <li>
-                                <a href="#currentTempCelsius" >currentTempCelsius</a>
-                            </li>
-                            <li>
-                                <a href="#currentTime" >currentTime</a>
-                            </li>
-                            <li>
-                                <a href="#hoveredPoint" >hoveredPoint</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#http" >http</a>
-                            </li>
-                            <li>
-                                <a href="#itemsPerPage" >itemsPerPage</a>
-                            </li>
-                            <li>
-                                <a href="#lastUpdate" >lastUpdate</a>
-                            </li>
-                            <li>
-                                <a href="#minuteData" >minuteData</a>
-                            </li>
-                            <li>
-                                <a href="#pageSizes" >pageSizes</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#subscription" >subscription</a>
-                            </li>
-                            <li>
-                                <a href="#tooltipX" >tooltipX</a>
-                            </li>
-                            <li>
-                                <a href="#tooltipY" >tooltipY</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#yamlData" >yamlData</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#changePage" >changePage</a>
-                            </li>
-                            <li>
-                                <a href="#changePageSize" >changePageSize</a>
-                            </li>
-                            <li>
-                                <a href="#chartWidth" >chartWidth</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#formatCurrentTime" >formatCurrentTime</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#formatTimeFromSeconds" >formatTimeFromSeconds</a>
-                            </li>
-                            <li>
-                                <a href="#getPageNumbers" >getPageNumbers</a>
-                            </li>
-                            <li>
-                                <a href="#getPowerPoints" >getPowerPoints</a>
-                            </li>
-                            <li>
-                                <a href="#getPowerY" >getPowerY</a>
-                            </li>
-                            <li>
-                                <a href="#getRecentData" >getRecentData</a>
-                            </li>
-                            <li>
-                                <a href="#getTempPoints" >getTempPoints</a>
-                            </li>
-                            <li>
-                                <a href="#getTempY" >getTempY</a>
-                            </li>
-                            <li>
-                                <a href="#getX" >getX</a>
-                            </li>
-                            <li>
-                                <a href="#getXLabels" >getXLabels</a>
-                            </li>
-                            <li>
-                                <a href="#hideTooltip" >hideTooltip</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loadSimulatedData" >loadSimulatedData</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loadYamlData" >loadYamlData</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#showTooltip" >showTooltip</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#updateData" >updateData</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#updateMinuteData" >updateMinuteData</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
 
 
-
-
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
+                            <b> showTooltip</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>showTooltip(event: MouseEvent, point: any)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> hideTooltip</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>hideTooltip()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> loadYamlData</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>loadYamlData()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> loadSimulatedData</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>loadSimulatedData()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getPageNumbers</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getPageNumbers()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>(string | number)[]</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> updateData</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>updateData()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> updateMinuteData</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>updateMinuteData(data: { timestamp: number; displayTime: string; powerKWh: number; tempCelsius: number; count: number; })</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> changePage</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>changePage(newPage: number)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> changePageSize</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>changePageSize(newSize: number)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> formatCurrentTime</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>formatCurrentTime()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>string</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> formatTimeFromSeconds</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>formatTimeFromSeconds(seconds: number)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>string</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> chartWidth</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>chartWidth()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>number</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getX</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getX(index: number)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>number</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getPowerY</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getPowerY(value: number)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>number</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getTempY</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getTempY(value: number)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>number</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getPowerPoints</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getPowerPoints()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>string</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getTempPoints</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getTempPoints()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>string</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getXLabels</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getXLabels()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>{ x: number; displayTime: string; uniqueKey: string; }[]</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getRecentData</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getRecentData()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>(MinuteData &amp; { uniqueKey: string; })[]</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> currentPage</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#totalPages" >totalPages</a>
-                                </li>
-                                <li>
-                                    <a href="#paginatedData" >paginatedData</a>
-                                </li>
-                            </ul>
+                            <code>currentPage:     <code>number</code>
+    </bcode>
                         </td>
                     </tr>
-        </tbody>
-    </table>
-</section>
-
-
-
-
-
-
-    <section data-compodoc="block-methods">
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="changePage"></a>
-                    <span class="name">
-                        <span ><b>changePage</b></span>
-                        <a href="#changePage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>changePage(newPage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>newPage</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="changePageSize"></a>
-                    <span class="name">
-                        <span ><b>changePageSize</b></span>
-                        <a href="#changePageSize"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>changePageSize(newSize: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>newSize</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="chartWidth"></a>
-                    <span class="name">
-                        <span ><b>chartWidth</b></span>
-                        <a href="#chartWidth"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>chartWidth()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="formatCurrentTime"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>formatCurrentTime</b></span>
-                        <a href="#formatCurrentTime"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>formatCurrentTime()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="formatTimeFromSeconds"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>formatTimeFromSeconds</b></span>
-                        <a href="#formatTimeFromSeconds"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>formatTimeFromSeconds(seconds: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>seconds</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getPageNumbers"></a>
-                    <span class="name">
-                        <span ><b>getPageNumbers</b></span>
-                        <a href="#getPageNumbers"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getPageNumbers()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown[]</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getPowerPoints"></a>
-                    <span class="name">
-                        <span ><b>getPowerPoints</b></span>
-                        <a href="#getPowerPoints"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getPowerPoints()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getPowerY"></a>
-                    <span class="name">
-                        <span ><b>getPowerY</b></span>
-                        <a href="#getPowerY"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getPowerY(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>value</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getRecentData"></a>
-                    <span class="name">
-                        <span ><b>getRecentData</b></span>
-                        <a href="#getRecentData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getRecentData()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Array&lt;unknown&gt;</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTempPoints"></a>
-                    <span class="name">
-                        <span ><b>getTempPoints</b></span>
-                        <a href="#getTempPoints"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getTempPoints()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTempY"></a>
-                    <span class="name">
-                        <span ><b>getTempY</b></span>
-                        <a href="#getTempY"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getTempY(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>value</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getX"></a>
-                    <span class="name">
-                        <span ><b>getX</b></span>
-                        <a href="#getX"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getX(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>index</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getXLabels"></a>
-                    <span class="name">
-                        <span ><b>getXLabels</b></span>
-                        <a href="#getXLabels"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getXLabels()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Array&lt;literal type&gt;</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="hideTooltip"></a>
-                    <span class="name">
-                        <span ><b>hideTooltip</b></span>
-                        <a href="#hideTooltip"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>hideTooltip()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadSimulatedData"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>loadSimulatedData</b></span>
-                        <a href="#loadSimulatedData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadSimulatedData()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadYamlData"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>loadYamlData</b></span>
-                        <a href="#loadYamlData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadYamlData()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
-                    <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="showTooltip"></a>
-                    <span class="name">
-                        <span ><b>showTooltip</b></span>
-                        <a href="#showTooltip"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>showTooltip(event: MouseEvent, point: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>event</td>
-                                            <td>
-                                                        <code>MouseEvent</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>point</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateData"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>updateData</b></span>
-                        <a href="#updateData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateData()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateMinuteData"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>updateMinuteData</b></span>
-                        <a href="#updateMinuteData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateMinuteData(time: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, powerKWh: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, tempCelsius: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>time</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>powerKWh</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>tempCelsius</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-    <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="currentPage"></a>
-                    <span class="name">
-                        <span ><b>currentPage</b></span>
-                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>1</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="currentPowerKWh"></a>
-                    <span class="name">
-                        <span ><b>currentPowerKWh</b></span>
-                        <a href="#currentPowerKWh"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;--&#x27;)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="currentTempCelsius"></a>
-                    <span class="name">
-                        <span ><b>currentTempCelsius</b></span>
-                        <a href="#currentTempCelsius"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;--&#x27;)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="currentTime"></a>
-                    <span class="name">
-                        <span ><b>currentTime</b></span>
-                        <a href="#currentTime"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>signal(this.formatCurrentTime())</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="hoveredPoint"></a>
-                    <span class="name">
-                        <span ><b>hoveredPoint</b></span>
-                        <a href="#hoveredPoint"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="http"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>http</b></span>
-                        <a href="#http"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(HttpClient)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="itemsPerPage"></a>
-                    <span class="name">
-                        <span ><b>itemsPerPage</b></span>
-                        <a href="#itemsPerPage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>5</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="lastUpdate"></a>
-                    <span class="name">
-                        <span ><b>lastUpdate</b></span>
-                        <a href="#lastUpdate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;--&#x27;)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="minuteData"></a>
-                    <span class="name">
-                        <span ><b>minuteData</b></span>
-                        <a href="#minuteData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>signal&lt;MinuteData[]&gt;([])</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="pageSizes"></a>
-                    <span class="name">
-                        <span ><b>pageSizes</b></span>
-                        <a href="#pageSizes"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[5, 10, 20, 50]</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="subscription"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>subscription</b></span>
-                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>Subscription | null</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="tooltipX"></a>
-                    <span class="name">
-                        <span ><b>tooltipX</b></span>
-                        <a href="#tooltipX"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>0</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="tooltipY"></a>
-                    <span class="name">
-                        <span ><b>tooltipY</b></span>
-                        <a href="#tooltipY"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>0</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="yamlData"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>yamlData</b></span>
-                        <a href="#yamlData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/YamlData.html" target="_self" >YamlData</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{ power: { unit: &#x27;&#x27;, values: [] }, temperature: { unit: &#x27;&#x27;, values: [] } }</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-accessors">
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="totalPages"></a>
-                        <span class="name"><b>totalPages</b><a href="#totalPages"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>totalPages()</code></span>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="paginatedData"></a>
-                        <span class="name"><b>paginatedData</b><a href="#paginatedData"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>paginatedData()</code></span>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
-</div>
-
-
-
-
-    <div class="tab-pane fade " id="styleData">
-            <pre class="line-numbers"><code class="language-scss">
-    /* Pagination styles */
-    .table-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    
-    .page-size-selector {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .page-size-selector select {
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      border: 1px solid #ddd;
-      background: white;
-      font-size: 0.9rem;
-    }
-    
-    .table-container {
-      overflow-x: auto;
-      margin: 1rem 0;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      padding: 1rem;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      font-size: 0.95rem;
-    }
-    
-    th, td {
-      padding: 0.75rem 1rem;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-    }
-    
-    th {
-      background-color: #f8f9fa;
-      color: #495057;
-      text-align: center;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-    }
-    
-    .number-header {
-      text-align: right !important;
-    }
-    
-    .time-header {
-      text-align: left !important;
-    }
-    
-    td {
-      color: #2c3e50;
-      vertical-align: middle;
-    }
-    
-    tr:not(:last-child) td {
-      border-bottom: 1px solid #f1f3f5;
-    }
-    
-    tr:hover td {
-      background-color: #f8f9fa;
-    }
-    
-    .number-cell {
-      font-family: &#x27;Roboto Mono&#x27;, &#x27;Courier New&#x27;, monospace;
-      text-align: center;
-      color: #2c3e50;
-      font-weight: 500;
-    }
-    
-    .time-cell {
-      color: #495057;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    
-    @media (max-width: 768px) {
-      .table-container {
-        padding: 0.5rem;
-      }
-      
-      th, td {
-        padding: 0.6rem 0.5rem;
-        font-size: 0.85rem;
-      }
-      
-      th {
-        font-size: 0.75rem;
-      }
-    }
-    
-    .pagination-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    
-    .pagination-controls button {
-      padding: 0.5rem 0.8rem;
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .pagination-controls button:hover:not(:disabled) {
-      background: #f0f0f0;
-    }
-    
-    .pagination-controls button.active {
-      background: #667eea;
-      color: white;
-      border-color: #667eea;
-    }
-    
-    .pagination-controls button.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .pagination-controls button[disabled] {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .page-info {
-      margin-left: 1rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    
-    
-    @media (max-width: 768px) {
-      .table-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-      
-      .pagination-controls {
-        gap: 0.3rem;
-      }
-      
-      .pagination-controls button {
-        padding: 0.3rem 0.6rem;
-      }
-      
-      .page-info {
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin: 0.5rem 0 0;
-      }
-    }
-    .tooltip {
-      position: fixed;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 14px;
-      pointer-events: none;
-      z-index: 1000;
-      transform: translate(-50%, -100%);
-      margin-top: -10px;
-      min-width: 160px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .tooltip-time {
-      font-weight: bold;
-      margin-bottom: 4px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      padding-bottom: 4px;
-    }
-    
-    .tooltip-value {
-      margin: 4px 0;
-    }
-    
-    .tooltip-value span {
-      color: #ccc;
-    }
-    
-    .data-point {
-      cursor: pointer;
-      transition: r 0.2s;
-    }
-    
-    .data-point:hover {
-      r: 6;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .dashboard {
-      font-family: &#x27;Segoe UI&#x27;, Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    header {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      color: #667eea;
-      font-size: 2.5em;
-    }
-
-    .current-time {
-      font-size: 1.5em;
-      color: #666;
-      font-weight: bold;
-    }
-
-    .current-values {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .value-card {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-    }
-
-    .value-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .value-card .icon {
-      font-size: 4em;
-    }
-
-    .value-card .content h3 {
-      color: #666;
-      margin-bottom: 10px;
-      font-size: 1.2em;
-    }
-
-    .value-card .value {
-      font-size: 2.5em;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .value-card.power .value {
-      color: #ff6b6b;
-    }
-
-    .value-card.temperature .value {
-      color: #4ecdc4;
-    }
-
-    .value-card .value span {
-      font-size: 0.5em;
-      color: #999;
-    }
-
-    .value-card .subtitle {
-      color: #999;
-      font-size: 0.9em;
-      margin-top: 5px;
-    }
-
-    .charts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .chart-container {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    .chart-container h2 {
-      color: #667eea;
-      margin-bottom: 20px;
-    }
-
-    .data-table {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    .data-table h2 {
-      color: #667eea;
-      margin-bottom: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    th {
-      background: #f5f5f5;
-      font-weight: bold;
-      color: #667eea;
-    }
-
-    tr:hover {
-      background: #f9f9f9;
-    }
-  
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
-            </div>
-        </div>
-    </div>
-
-    
-</div>
-
-<script src="../js/libs/vis-network.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><div class="tooltip" *ngIf="hoveredPoint" [ngStyle]="{\'left.px\': tooltipX, \'top.px\': tooltipY}">  <div class="tooltip-time">{{ hoveredPoint.displayTime }}</div>  <div class="tooltip-value" *ngIf="hoveredPoint.powerKWh !== undefined">    <span>Energía:</span> {{ hoveredPoint.powerKWh.toFixed(3) }} kWh  </div>  <div class="tooltip-value" *ngIf="hoveredPoint.tempCelsius !== undefined">    <span>Temperatura:</span> {{ hoveredPoint.tempCelsius.toFixed(2) }}°C  </div></div><div class="dashboard">  <header>    <h1>⚡ Dashboard de Monitoreo en Tiempo Real</h1>    <div class="current-time">{{ currentTime() }}</div>  </header>  <!-- Sección de Valores Actuales -->  <section class="current-values">    <div class="value-card power">      <div class="icon">⚡</div>      <div class="content">        <h3>Energía Producida</h3>        <div class="value">{{ currentPowerKWh() }} <span>kWh</span></div>        <div class="subtitle">Última actualización: {{ lastUpdate() }}</div>      </div>    </div>    <div class="value-card temperature">      <div class="icon">🌡️</div>      <div class="content">        <h3>Temperatura Media</h3>        <div class="value">{{ currentTempCelsius() }} <span>°C</span></div>        <div class="subtitle">Última actualización: {{ lastUpdate() }}</div>      </div>    </div>  </section>  <!-- Gráficas -->  <section class="charts">    <div class="chart-container">      <h2>📊 Energía Producida (kWh) - Por Minuto</h2>      <svg width="100%" height="300" #powerChart>        <g transform="translate(50, 20)">          <!-- Grid lines -->          @for (i of [0, 1, 2, 3, 4]; track i) {            <line              [attr.x1]="0"              [attr.y1]="i * 60"              [attr.x2]="chartWidth()"              [attr.y2]="i * 60"              stroke="#e0e0e0"              stroke-dasharray="5,5"            />          }          <!-- Power line -->          @if (minuteData().length > 1) {            <polyline              [attr.points]="getPowerPoints()"              fill="none"              stroke="#ff6b6b"              stroke-width="2"            />            <!-- Data points -->            @for (point of minuteData(); track point.timestamp; let i = $index) {              <circle                class="data-point"                [attr.cx]="getX(i)"                [attr.cy]="getPowerY(point.powerKWh)"                r="4"                fill="#ff6b6b"                (mouseenter)="showTooltip($event, point)"                (mouseleave)="hideTooltip()"              />            }          }          <!-- Axes -->          <line x1="0" y1="240" [attr.x2]="chartWidth()" y2="240" stroke="#333" stroke-width="2"/>          <line x1="0" y1="0" x2="0" y2="240" stroke="#333" stroke-width="2"/>          <!-- Labels -->          @for (point of getXLabels(); track point.uniqueKey) {            <text              [attr.x]="point.x"              y="260"              text-anchor="middle"              font-size="12"            >              {{ point.displayTime }}            </text>          }        </g>      </svg>    </div>    <div class="chart-container">      <h2>🌡️ Temperatura Media (°C) - Por Minuto</h2>      <svg width="100%" height="300" #tempChart>        <g transform="translate(50, 20)">          <!-- Grid lines -->          @for (i of [0, 1, 2, 3, 4]; track i) {            <line              [attr.x1]="0"              [attr.y1]="i * 60"              [attr.x2]="chartWidth()"              [attr.y2]="i * 60"              stroke="#e0e0e0"              stroke-dasharray="5,5"            />          }          <!-- Temperature line -->          @if (minuteData().length > 1) {            <polyline              [attr.points]="getTempPoints()"              fill="none"              stroke="#4ecdc4"              stroke-width="2"            />            <!-- Data points -->            @for (point of minuteData(); track point.timestamp; let i = $index) {              <circle                class="data-point"                [attr.cx]="getX(i)"                [attr.cy]="getTempY(point.tempCelsius)"                r="4"                fill="#4ecdc4"                (mouseenter)="showTooltip($event, point)"                (mouseleave)="hideTooltip()"              />            }          }          <!-- Axes -->          <line x1="0" y1="240" [attr.x2]="chartWidth()" y2="240" stroke="#333" stroke-width="2"/>          <line x1="0" y1="0" x2="0" y2="240" stroke="#333" stroke-width="2"/>          <!-- Labels -->          @for (point of getXLabels(); track point.uniqueKey) {            <text              [attr.x]="point.x"              y="260"              text-anchor="middle"              font-size="12"            >              {{ point.displayTime }}            </text>          }        </g>      </svg>    </div>  </section>  <!-- Tabla de datos recientes -->  <section class="data-table">    <div class="table-header">      <h2>📋 Historial de Datos</h2>      <div class="page-size-selector">        <span>Mostrar:</span>        <select (change)="changePageSize($any($event.target).value)" [value]="itemsPerPage">          @for (size of pageSizes; track size) {            <option [value]="size">{{ size }} por página</option>          }        </select>      </div>    </div>    <div class="table-container">      <table>        <thead>          <tr>            <th class="time-header">Hora</th>            <th class="number-header">Energía (kWh)</th>            <th class="number-header">Temperatura (°C)</th>          </tr>        </thead>        <tbody>          @for (data of paginatedData; track data.uniqueKey) {            <tr>              <td class="time-cell">{{ data.displayTime }}</td>              <td class="number-cell">{{ data.powerKWh.toFixed(2) }}</td>              <td class="number-cell">{{ data.tempCelsius.toFixed(2) }}</td>            </tr>          }        </tbody>      </table>    </div>    <div class="pagination-controls">      <button        (click)="changePage(1)"        [disabled]="currentPage === 1"        [class.disabled]="currentPage === 1">        &laquo;      </button>      <button        (click)="changePage(currentPage - 1)"        [disabled]="currentPage === 1"        [class.disabled]="currentPage === 1">        &lsaquo;      </button>      @for (page of getPageNumbers(); track page) {        @if (page === \'...\') {          <span class="ellipsis">...</span>        } @else {          <button            (click)="changePage(+page)"            [class.active]="page === currentPage">            {{ page }}          </button>        }      }      <button        (click)="changePage(currentPage + 1)"        [disabled]="currentPage === totalPages"        [class.disabled]="currentPage === totalPages">        &rsaquo;      </button>      <button        (click)="changePage(totalPages)"        [disabled]="currentPage === totalPages"        [class.disabled]="currentPage === totalPages">        &raquo;      </button>      <span class="page-info">        Página {{ currentPage }} de {{ totalPages }} ({{ minuteData().length }} registros)      </span>    </div>  </section></div></div>'
-    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'App'};
-</script>
-<script src="../js/tree.js"></script>
-
-
-
-
-
-
-
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>1</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> currentPowerKWh</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>currentPowerKWh:     <code>WritableSignal&lt;string&gt;</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> currentTempCelsius</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>currentTempCelsius:     <code>WritableSignal&lt;string&gt;</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> currentTime</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>currentTime:     <code>WritableSignal&lt;string&gt;</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> hoveredPoint</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>hoveredPoint:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> http</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>http:     <code>{}</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> itemsPerPage</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>itemsPerPage:     <code>number</code>
+    </bcode>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>5</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> lastUpdate</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>lastUpdate:     <code>WritableSignal&lt;string&gt;</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> minuteData</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>minuteData:     <code>WritableSignal&lt;MinuteData[]&gt;</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> pageSizes</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>pageSizes:     <code>number[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> paginatedData</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>paginatedData:     <code>(MinuteData &amp; { uniqueKey: string; })[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> subscription</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>subscription:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> tooltipX</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>tooltipX:     <code>number</code>
+    </bcode>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>0</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> tooltipY</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>tooltipY:     <code>number</code>
+    </bcode>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>0</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> totalPages</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>totalPages:     <code>number</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> yamlData</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>yamlData:     <code>YamlData</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 
 
 
@@ -2741,64 +1492,32 @@
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'App.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script>
-               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               checkToggle(darkModeState);
-               if ($darkModeToggleSwitchers.length > 0) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
-                              darkModeState = !darkModeState;
-                              toggleDarkMode(darkModeState);
-                         });
-                    }
-               }
-          </script>
-
-       <script src="../js/libs/custom-elements.min.js"></script>
-       <script src="../js/libs/lit-html.js"></script>
-
-       <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 
-       <script src="../js/tabs.js"></script>
-       <script src="../js/menu.js"></script>
-       <script src="../js/libs/clipboard.min.js"></script>
-       <script src="../js/libs/prism.js"></script>
-       <script src="../js/sourceCode.js"></script>
-          <script src="../js/search/search.js"></script>
-          <script src="../js/search/lunr.min.js"></script>
-          <script src="../js/search/search-lunr.js"></script>
-          <script src="../js/search/search_index.js"></script>
-       <script src="../js/lazy-load-graphs.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>

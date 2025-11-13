@@ -105,7 +105,7 @@
                                     <a href="../injectables/HbsRenderService.html" >HbsRenderService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/TemplateEditorService.html" >TemplateEditorService</a>
+                                    <a href="../injectables/TemplateEditorService.html"  class="active" >TemplateEditorService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/ZipExportService.html" >ZipExportService</a>
@@ -128,7 +128,7 @@
                                     <a href="../interfaces/CompoDocConfig.html" >CompoDocConfig</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/DataPoint.html"  class="active" >DataPoint</a>
+                                    <a href="../interfaces/DataPoint.html" >DataPoint</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/MinuteData.html" >MinuteData</a>
@@ -256,7 +256,7 @@
                                            <a href="../injectables/HbsRenderService.html" >HbsRenderService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/TemplateEditorService.html" >TemplateEditorService</a>
+                                           <a href="../injectables/TemplateEditorService.html"  class="active" >TemplateEditorService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/ZipExportService.html" >ZipExportService</a>
@@ -279,7 +279,7 @@
                                            <a href="../interfaces/CompoDocConfig.html" >CompoDocConfig</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/DataPoint.html"  class="active" >DataPoint</a>
+                                           <a href="../interfaces/DataPoint.html" >DataPoint</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/MinuteData.html" >MinuteData</a>
@@ -316,86 +316,216 @@
                    
                    </nav>
                </div>
-               <div class="content interface">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
-
-
-
 <ol class="breadcrumb">
-  <li>Interfaces</li>
-  <li>DataPoint</li>
+  <li>Injectables</li>
+  <li>TemplateEditorService</li>
 </ol>
 
         <p class="comment">
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/app.ts</code>
+            <code>documentation/template-playground/template-editor.service.ts</code>
         </p>
 
 
 
-
+            <section>
+                <h3 id="methods">Methods</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> initializeEditor</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>initializeEditor(container: HTMLElement)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> setEditorContent</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>setEditorContent(content: string, fileType: string)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> setOnChangeCallback</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>setOnChangeCallback(callback: (value: string) => void)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> getLanguageFromFileType</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    <code>getLanguageFromFileType(fileType: string)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>string</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> registerHandlebarsLanguage</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    <code>registerHandlebarsLanguage()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> destroy</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>destroy()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
 
             <section>
                 <h3 id="inputs">Properties</h3>
                     <table class="table table-sm table-bordered">
                         <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <b>time</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>time:     <code>string</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>string</code>
-
-                                        </td>
-                                    </tr>
-
-
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> editor</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-lock"></span><code>editor:     <code>any</code>
+            </bcode>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <b>value</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>value:     <code>number</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>number</code>
-
-                                        </td>
-                                    </tr>
-
-
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> onChangeCallback</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-lock"></span><code>onChangeCallback:     <code>(value: string) &#x3D;&gt; void</code>
+            </bcode>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
+
+
+
 
 
 
