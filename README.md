@@ -1,5 +1,7 @@
 # 🌤️ Angular Meteo Dashboard
 
+# Screenshot is located in the /assets folder as "screenshot.png"
+
 A real-time monitoring dashboard for energy production and temperature data, built with Angular 20.3.0. This application displays live data visualizations and historical metrics in an intuitive interface.
 
 ## ✨ Features
@@ -54,6 +56,8 @@ A real-time monitoring dashboard for energy production and temperature data, bui
    ```
 
 4. Open your browser and navigate to `http://localhost:4200/`
+
+
 
 ## 📊 Data Structure
 
@@ -155,6 +159,12 @@ The application processes data with the following conversions:
    - Formula: `°C = (dK / 10) - 273.15`
 
 ## 🧪 Development
+
+
+##  Testing
+
+# Run tests
+npm run test / ng test
 
 ### Running the Application
 
