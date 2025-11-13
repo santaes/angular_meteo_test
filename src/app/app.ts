@@ -1,7 +1,9 @@
-import { Component, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 import { interval, Subscription } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import * as yaml from 'js-yaml';
 
 interface DataPoint {
   time: string;
@@ -194,7 +196,7 @@ interface MinuteData {
           <h2>📋 Historial de Datos</h2>
           <div class="page-size-selector">
             <span>Mostrar:</span>
-            <select (change)="changePageSize($any($event.target).value)" [value]="itemsPerPage">
+            <select id="itemsPerPage" name="itemsPerPage" (change)="changePageSize($any($event.target).value)" [value]="itemsPerPage">
               @for (size of pageSizes; track size) {
                 <option [value]="size">{{ size }} por página</option>
               }
@@ -638,9 +640,9 @@ export class App implements OnInit, OnDestroy {
   hideTooltip() {
     this.hoveredPoint = null;
   }
-  private subscription?: Subscription;
-  private yamlData: YamlData | null = null;
-  
+  private subscription: Subscription | null = null;
+  private yamlData: YamlData = { power: { unit: '', values: [] }, temperature: { unit: '', values: [] } };
+  private http = inject(HttpClient);
   currentTime = signal(this.formatCurrentTime());
   currentPowerKWh = signal('--');
   currentTempCelsius = signal('--');
@@ -677,9 +679,102 @@ export class App implements OnInit, OnDestroy {
   }
 
   private loadYamlData() {
-   // console.log(' Starting YAML data load...');
+    console.log('⏳ Loading YAML data...');
     
-    // Simular datos del YAML para 24 horas
+    // First, try to load the file as text
+    this.http.get('/data.yml', { responseType: 'text' }).subscribe({
+      next: (yamlString) => {
+        try {
+          console.log('📄 Raw YAML content (first 200 chars):', yamlString.substring(0, 200) + '...');
+          
+          // Parse YAML string to JavaScript object
+          const parsedData = yaml.load(yamlString) as any;
+          console.log('✅ Successfully parsed YAML data');
+          
+          // Log the structure of the parsed data for debugging
+          console.log('🔍 Parsed YAML structure:', {
+            hasPower: !!parsedData.power,
+            hasTemperature: !!parsedData.temperature,
+            powerKeys: parsedData.power ? Object.keys(parsedData.power) : [],
+            tempKeys: parsedData.temperature ? Object.keys(parsedData.temperature) : []
+          });
+          
+          // First, process both datasets independently
+          const powerData = (parsedData.power?.values || []).map((item: any) => {
+            const value = typeof item.value === 'string' ? 
+              parseFloat(item.value) : 
+              (typeof item.value === 'number' ? item.value : 0);
+            
+            if (isNaN(value)) {
+              console.warn('⚠️ Invalid power value:', item.value);
+              return null;
+            }
+            
+            return {
+              time: item.time || '00:00:00',
+              value: value
+            };
+          }).filter((item: any) => item !== null);
+
+          const temperatureData = (parsedData.temperature?.values || []).map((item: any) => {
+            const value = typeof item.value === 'string' ? 
+              parseFloat(item.value) : 
+              (typeof item.value === 'number' ? item.value : 0);
+            
+            if (isNaN(value)) {
+              console.warn('⚠️ Invalid temperature value:', item.value);
+              return null;
+            }
+            
+            return {
+              time: item.time || '00:00:00',
+              value: value
+            };
+          }).filter((item: any) => item !== null);
+
+          // Find the minimum length between the two datasets
+          const minLength = Math.min(powerData.length, temperatureData.length);
+          
+          console.log(`📊 Found ${powerData.length} power values and ${temperatureData.length} temperature values`);
+          console.log(`📏 Using first ${minLength} data points from each`);
+          
+          // Create the result with matching data points
+          const result: YamlData = {
+            power: {
+              unit: parsedData.power?.unit || 'MW',
+              values: powerData.slice(0, minLength)
+            },
+            temperature: {
+              unit: parsedData.temperature?.unit || 'dK',
+              values: temperatureData.slice(0, minLength)
+            }
+          };
+          
+          console.log(`📊 Loaded ${result.power.values.length} power values and ${result.temperature.values.length} temperature values`);
+          
+          if (result.power.values.length > 0 && result.temperature.values.length > 0) {
+            this.yamlData = result;
+            // Add a small delay to ensure the UI updates
+            setTimeout(() => this.updateData(), 100);
+          } else {
+            throw new Error('No valid data points found in YAML');
+          }
+        } catch (error) {
+          console.error('❌ Error processing YAML data:', error);
+          console.warn('Falling back to simulated data');
+          this.loadSimulatedData();
+        }
+      },
+      error: (error) => {
+        console.error('❌ Failed to load YAML file:', error);
+        console.warn('Falling back to simulated data');
+        this.loadSimulatedData();
+      }
+    });
+  }
+
+  private loadSimulatedData() {
+    // Fallback data generation if YAML loading fails
     const powerValues: DataPoint[] = [];
     const tempValues: DataPoint[] = [];
     
@@ -703,11 +798,8 @@ export class App implements OnInit, OnDestroy {
       temperature: { unit: 'dK', values: tempValues }
     };
     
-   /*  console.log(' YAML data loaded successfully');
-    console.log(' Total power data points:', powerValues.length);
-    console.log(' Total temperature data points:', tempValues.length);
-    console.log(' Time range:', powerValues[0].time, 'to', powerValues[powerValues.length - 1].time);
-    console.log('─────────────────────────────────'); */
+    // Initialize with the first data point
+    this.updateData();
   }
 
   getPageNumbers(): (number | string)[] {
@@ -734,82 +826,95 @@ export class App implements OnInit, OnDestroy {
   }
 
   private updateData() {
-    if (!this.yamlData) {
-      console.warn(' No YAML data loaded yet');
-      return;
-    }
-    
-    const now = new Date();
-    // Time is now updated by the 1-second interval, no need to update it here
-    
-    // Calcular índice basado en la hora actual
-    const secondsToday = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-    const index = Math.floor(secondsToday / 5);
-    
-/*     console.log(' UPDATE TRIGGERED');
-    console.log(' Current time:', now.toLocaleTimeString());
-    console.log(' Seconds today:', secondsToday);
-    console.log(' Data index:', index);
-    console.log('⏰ Current time:', now.toLocaleTimeString());
-    console.log('📊 Seconds today:', secondsToday);
-    console.log('📍 Data index:', index); */
-    
-    if (index < this.yamlData.power.values.length) {
-      const powerMW = this.yamlData.power.values[index].value;
-      const tempDK = this.yamlData.temperature.values[index].value;
-      const dataTime = this.yamlData.power.values[index].time;
+    try {
+      // Check if we have valid data
+      if (!this.yamlData?.power?.values?.length || !this.yamlData?.temperature?.values?.length) {
+        console.warn('⚠️ No YAML data loaded yet or data is incomplete');
+        return;
+      }
       
-     /*  console.log('📈 Raw data from YAML:',this.minuteData());
+      const now = new Date();
+      const secondsToday = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+      
+      // Get the minimum length between power and temperature data
+      const dataLength = Math.min(
+        this.yamlData.power.values.length,
+        this.yamlData.temperature.values.length
+      );
+      
+      if (dataLength === 0) {
+        console.error('❌ No valid data points available');
+        return;
+      }
+      
+      // Calculate the index based on current time (data points every 5 seconds)
+      // Ensure the index is within the valid range [0, dataLength - 1]
+      const index = Math.min(
+        Math.max(0, Math.floor(secondsToday / 5)),
+        dataLength - 1
+      );
+      
+      console.log('⏰ Current time:', now.toLocaleTimeString());
+      console.log('📊 Seconds today:', secondsToday);
+      console.log('📏 Total data points available:', dataLength);
+      console.log('📍 Data index:', index, 'of', dataLength - 1);
+      
+      // Get the data points
+      const powerData = this.yamlData.power.values[index];
+      const tempData = this.yamlData.temperature.values[index];
+      
+      if (!powerData || !tempData) {
+        throw new Error(`Missing data at index ${index}`);
+      }
+      
+      // Process the data
+      const powerMW = powerData.value;
+      const tempDK = tempData.value;
+      const dataTime = powerData.time;
+      
+      // Convert MW to kWh (for 5 seconds)
+      const powerKWh = powerMW * 1000 * (5 / 3600);
+      
+      // Convert dK to °C (dK = deciKelvin = 0.1 Kelvin)
+      const tempCelsius = (tempDK / 10) - 273.15;
+      
+      console.log('📈 Raw data from YAML:');
       console.log('  - Time from file:', dataTime);
       console.log('  - Power (MW):', powerMW);
       console.log('  - Temperature (dK):', tempDK);
-       */
-      // Convertir MW a kWh (para 5 segundos)
-      const powerKWh = powerMW * 1000 * (5 / 3600);
-      
-      // Convertir dK a °C
-      const tempCelsius = tempDK / 10 - 273.15;
-      
-/*       console.log('🔄 Converted values:');
       console.log('  - Power (kWh):', powerKWh.toFixed(2));
-      console.log('  - Temperature (°C):', tempCelsius.toFixed(2)); */
+      console.log('  - Temperature (°C):', tempCelsius.toFixed(2));
       
+      // Update current values
       this.currentPowerKWh.set(powerKWh.toFixed(2));
       this.currentTempCelsius.set(tempCelsius.toFixed(2));
       this.lastUpdate.set(now.toLocaleTimeString());
       
-      // Actualizar datos por minuto
-      this.updateMinuteData(now, powerKWh, tempCelsius);
-/*       
+      // Update the minute data
+      this.updateMinuteData({
+        timestamp: now.getTime(),
+        displayTime: now.toLocaleTimeString(),
+        powerKWh: powerKWh,
+        tempCelsius: tempCelsius,
+        count: 1
+      });
+      
       console.log('✅ Data updated successfully');
       console.log('📊 Total minute data points:', this.minuteData().length);
-      console.log('─────────────────────────────────'); */
-    } else {
-      console.error('❌ Index out of bounds:', index, '>=', this.yamlData.power.values.length);
+      console.log('─────────────────────────────────');
+      
+    } catch (error) {
+      console.error('❌ Error in updateData:', error);
+      console.warn('⚠️ Falling back to simulated data');
+      this.loadSimulatedData();
     }
   }
 
-  private updateMinuteData(time: Date, powerKWh: number, tempCelsius: number) {
-    // Store the full timestamp for unique identification
-    const timestamp = time.getTime();
-    // Format for display
-    const displayTime = time.toLocaleTimeString('es-ES', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false 
-    });
-    
+  private updateMinuteData(data: {timestamp: number, displayTime: string, powerKWh: number, tempCelsius: number, count: number}) {
     const current = this.minuteData();
     
     // Add new data point (keep last 120 points - 10 minutes of 5-second intervals)
-    const newData = [...current, {
-      timestamp,
-      displayTime,
-      powerKWh,
-      tempCelsius,
-      count: 1
-    }].slice(-120); // Keep last 10 minutes of 5-second data points
+    const newData = [...current, data].slice(-120); // Keep last 10 minutes of 5-second data points
     
     this.minuteData.set(newData);
 /*     console.log('➕ Added new data point:', displayTime); */
