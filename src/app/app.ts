@@ -679,25 +679,25 @@ export class App implements OnInit, OnDestroy {
   }
 
   private loadYamlData() {
-    console.log('⏳ Loading YAML data...');
+   // console.log('⏳ Loading YAML data...');
     
     // First, try to load the file as text
     this.http.get('/data.yml', { responseType: 'text' }).subscribe({
       next: (yamlString) => {
         try {
-          console.log('📄 Raw YAML content (first 200 chars):', yamlString.substring(0, 200) + '...');
+          //console.log('📄 Raw YAML content (first 200 chars):', yamlString.substring(0, 200) + '...');
           
           // Parse YAML string to JavaScript object
           const parsedData = yaml.load(yamlString) as any;
-          console.log('✅ Successfully parsed YAML data');
+          //console.log('✅ Successfully parsed YAML data');
           
           // Log the structure of the parsed data for debugging
-          console.log('🔍 Parsed YAML structure:', {
-            hasPower: !!parsedData.power,
-            hasTemperature: !!parsedData.temperature,
-            powerKeys: parsedData.power ? Object.keys(parsedData.power) : [],
-            tempKeys: parsedData.temperature ? Object.keys(parsedData.temperature) : []
-          });
+  /*           console.log('🔍 Parsed YAML structure:', {
+              hasPower: !!parsedData.power,
+              hasTemperature: !!parsedData.temperature, 
+              powerKeys: parsedData.power ? Object.keys(parsedData.power) : [],
+              tempKeys: parsedData.temperature ? Object.keys(parsedData.temperature) : []
+            }); */
           
           // First, process both datasets independently
           const powerData = (parsedData.power?.values || []).map((item: any) => {
@@ -735,8 +735,8 @@ export class App implements OnInit, OnDestroy {
           // Find the minimum length between the two datasets
           const minLength = Math.min(powerData.length, temperatureData.length);
           
-          console.log(`📊 Found ${powerData.length} power values and ${temperatureData.length} temperature values`);
-          console.log(`📏 Using first ${minLength} data points from each`);
+          //console.log(`📊 Found ${powerData.length} power values and ${temperatureData.length} temperature values`);
+          //console.log(`📏 Using first ${minLength} data points from each`);
           
           // Create the result with matching data points
           const result: YamlData = {
@@ -750,7 +750,7 @@ export class App implements OnInit, OnDestroy {
             }
           };
           
-          console.log(`📊 Loaded ${result.power.values.length} power values and ${result.temperature.values.length} temperature values`);
+          //console.log(`📊 Loaded ${result.power.values.length} power values and ${result.temperature.values.length} temperature values`);
           
           if (result.power.values.length > 0 && result.temperature.values.length > 0) {
             this.yamlData = result;
@@ -829,7 +829,6 @@ export class App implements OnInit, OnDestroy {
     try {
       // Check if we have valid data
       if (!this.yamlData?.power?.values?.length || !this.yamlData?.temperature?.values?.length) {
-        console.warn('⚠️ No YAML data loaded yet or data is incomplete');
         return;
       }
       
@@ -854,10 +853,10 @@ export class App implements OnInit, OnDestroy {
         dataLength - 1
       );
       
-      console.log('⏰ Current time:', now.toLocaleTimeString());
-      console.log('📊 Seconds today:', secondsToday);
-      console.log('📏 Total data points available:', dataLength);
-      console.log('📍 Data index:', index, 'of', dataLength - 1);
+      //console.log('⏰ Current time:', now.toLocaleTimeString());
+      //console.log('📊 Seconds today:', secondsToday);
+      //console.log('📏 Total data points available:', dataLength);
+      //console.log('📍 Data index:', index, 'of', dataLength - 1);
       
       // Get the data points
       const powerData = this.yamlData.power.values[index];
@@ -878,12 +877,12 @@ export class App implements OnInit, OnDestroy {
       // Convert dK to °C (dK = deciKelvin = 0.1 Kelvin)
       const tempCelsius = (tempDK / 10) - 273.15;
       
-      console.log('📈 Raw data from YAML:');
-      console.log('  - Time from file:', dataTime);
-      console.log('  - Power (MW):', powerMW);
-      console.log('  - Temperature (dK):', tempDK);
-      console.log('  - Power (kWh):', powerKWh.toFixed(2));
-      console.log('  - Temperature (°C):', tempCelsius.toFixed(2));
+      //console.log('📈 Raw data from YAML:');
+      //console.log('  - Time from file:', dataTime);
+      //console.log('  - Power (MW):', powerMW);
+      //console.log('  - Temperature (dK):', tempDK);
+      //console.log('  - Power (kWh):', powerKWh.toFixed(2));
+      //console.log('  - Temperature (°C):', tempCelsius.toFixed(2));
       
       // Update current values
       this.currentPowerKWh.set(powerKWh.toFixed(2));
@@ -899,9 +898,9 @@ export class App implements OnInit, OnDestroy {
         count: 1
       });
       
-      console.log('✅ Data updated successfully');
-      console.log('📊 Total minute data points:', this.minuteData().length);
-      console.log('─────────────────────────────────');
+      //console.log('✅ Data updated successfully');
+      //console.log('📊 Total minute data points:', this.minuteData().length);
+      //console.log('─────────────────────────────────');
       
     } catch (error) {
       console.error('❌ Error in updateData:', error);
