@@ -1,52 +1,146 @@
-# AngularMeteoTest
+# 🌤️ Angular Meteo Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+A real-time monitoring dashboard for energy production and temperature data, built with Angular 20.3.0. This application displays live data visualizations and historical metrics in an intuitive interface.
 
-## Development server
+## ✨ Features
 
-To start a local development server, run:
+- **Real-time Data Display**
+  - Current power production in kWh
+  - Current temperature in °C
+  - Auto-updates every 5 seconds
 
-```bash
-ng serve
+- **Interactive Charts**
+  - Energy production trends
+  - Temperature variations
+  - Hover tooltips for exact values
+
+- **Data Table**
+  - Paginated historical data
+  - Sortable columns
+  - Responsive design
+  - Customizable items per page
+
+- **Responsive Design**
+  - Works on desktop and mobile devices
+  - Adaptive layout
+  - Touch-friendly controls
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or later)
+- npm (v8 or later) or Yarn
+- Angular CLI (v20.3.0 or later)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   cd angular_meteo_test
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Start the development server:
+   ```bash
+   ng serve
+   ```
+
+4. Open your browser and navigate to `http://localhost:4200/`
+
+## 📊 Data Structure
+
+The application uses simulated data with the following structure:
+
+```typescript
+interface DataPoint {
+  time: string;        // Format: "HH:MM:SS"
+  value: number;       // Raw value
+}
+
+interface YamlData {
+  power: {
+    unit: string;      // "MW"
+    values: DataPoint[];
+  };
+  temperature: {
+    unit: string;      // "dK" (deciKelvin)
+    values: DataPoint[];
+  };
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Development
 
-## Code scaffolding
+### Data Simulation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The application includes a built-in data simulator that generates 24 hours of sample data with 5-second intervals. The data includes:
+- Power values between 54.5 and 56.0 MW
+- Temperature values between 292.0K and 293.0K (18.85°C to 19.85°C)
 
-```bash
-ng generate component component-name
+### Key Components
+
+- **app.component.ts**: Main application logic and data handling
+- **app.component.html**: UI layout and templates
+- **app.component.scss**: Styling and theming
+
+## 🏗️ Project Structure
+
+```
+src/
+├── app/
+│   ├── app.component.ts      # Main application component
+│   ├── app.component.html    # Main template
+│   ├── app.component.scss    # Styles
+│   └── app.config.ts         # Application configuration
+├── assets/
+│   └── data/                # Data files
+└── styles.scss              # Global styles
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🧪 Testing
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+Run unit tests:
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+Run end-to-end tests:
+```bash
+ng e2e
+```
 
-For end-to-end (e2e) testing, run:
+## 🚀 Deployment
+
+Build for production:
+```bash
+ng build --configuration production
+```
+
+The build artifacts will be stored in the `dist/` directory.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with [Angular](https://angular.io/)
+- Icons by [Font Awesome](https://fontawesome.com/)
+- Charts rendered with SVG
+
+---
+
+<div align="center">
+  Made with ❤️ by [Your Name]
+</div>
 
 ```bash
 ng e2e
