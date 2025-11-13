@@ -327,7 +327,7 @@ interface MinuteData {
     }
     
     .number-header {
-      text-align: right !important;
+      text-align: center !important;
     }
     
     .time-header {
